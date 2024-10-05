@@ -214,9 +214,9 @@ class _QuizeAppState extends State{
           //color:const Color.fromARGB(255, 191, 244, 193),
           padding:const EdgeInsets.all(10.0),
           decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 198, 238, 254), // Background color of the container
+            color: const Color.fromARGB(255, 198, 238, 254),
               border: Border.all(
-                color: const Color.fromARGB(255, 106, 177, 207), // Border color
+                color: const Color.fromARGB(255, 106, 177, 207), 
                 width: 3, // Border width
               ),
             borderRadius: BorderRadius.circular(10),
