@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,20 +13,24 @@ void main(){
 
 class MyApp extends StatelessWidget{
   const MyApp({super.key});
+  @override
   Widget build(BuildContext context){
-    return Gpay();
+    return const Gpay();
   }
 }
 class Gpay extends StatefulWidget{
   const Gpay({super.key});
+  @override
   State createState()=>_GpayState();
 }
 class _GpayState extends State{
 
   bool visiblity=false;
   bool visiblity1=false;
+  @override
   Widget build(BuildContext context){
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home:Scaffold(
         body:SingleChildScrollView(
           scrollDirection: Axis.vertical,
@@ -78,6 +84,7 @@ class _GpayState extends State{
                     Container(
                       height: 40,
                       width: 40,
+                      margin: const EdgeInsets.only(left: 10),
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
                         color:Colors.red.shade800,
@@ -426,9 +433,13 @@ class _GpayState extends State{
                   ),
                   Row(
                     children: [
+                      const SizedBox(
+                        width: 15,
+                      ),
                     Container(
                       height: 30,
                       width: 100,
+                      
                       alignment:Alignment.center,
                       child: const Text(
                         "People",
@@ -748,8 +759,8 @@ class _GpayState extends State{
                               ),
                               alignment: Alignment.center,
                               child: const Icon(
-                                Icons.more,
-                                size: 20,
+                                Icons.keyboard_arrow_down,
+                                size: 30,
                                 color:Color.fromARGB(255, 32, 74, 191),
                               ),
                             ),
@@ -1250,8 +1261,8 @@ class _GpayState extends State{
                               ),
                               alignment: Alignment.center,
                               child:const Icon(
-                                Icons.arrow_upward,
-                                size: 20,
+                                Icons.keyboard_arrow_up,
+                                size: 30,
                                 color:Color.fromARGB(255, 32, 74, 191),
                               ),
                             ),
@@ -1433,7 +1444,7 @@ class _GpayState extends State{
                         children: [
                           GestureDetector(
                             onTap:(){
-                              visiblity=false;
+                              visiblity1=false;
                               setState((){});
                             },
                             child: Container(
@@ -1449,8 +1460,8 @@ class _GpayState extends State{
                               ),
                               alignment: Alignment.center,
                               child: const Icon(
-                                Icons.more,
-                                size: 20,
+                                Icons.keyboard_arrow_down,
+                                size: 30,
                                 color:Color.fromARGB(255, 32, 74, 191),
                               ),
                             ),
@@ -1480,7 +1491,7 @@ class _GpayState extends State{
 
 
                   Visibility(
-                        visible: !visiblity,
+                        visible: !visiblity1,
                       child: Column(
                       children: [
                        Row(
@@ -1935,7 +1946,7 @@ class _GpayState extends State{
                         children: [
                           GestureDetector(
                             onTap:(){
-                              visiblity=true;
+                              visiblity1=true;
                               setState((){});
                             },
                             child: Container(
@@ -1951,8 +1962,8 @@ class _GpayState extends State{
                               ),
                               alignment: Alignment.center,
                               child:const Icon(
-                                Icons.arrow_upward,
-                                size: 20,
+                                Icons.keyboard_arrow_up,
+                                size: 30,
                                 color:Color.fromARGB(255, 32, 74, 191),
                               ),
                             ),
@@ -1980,149 +1991,291 @@ class _GpayState extends State{
                   ),
                   ),
 
-                Column(
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
                   children: [
-                    Row(
+                    const SizedBox(
+                        width: 15,
+                      ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Column(
-                          children: [
-                        Container(
-                      margin:const EdgeInsets.only(
-                        left: 10,
-                      ),
-                      height: 40,
-                      width: 200,
-                      child:const Text(
-                        "Bills & rechagres",
-                        style:TextStyle(
-                          fontSize: 30,
-                          color:Colors.black,
-                        ),
-                      ),
-                    ),
                     Container(
-                      height: 40,
-                      width: 300,
-                      margin:const EdgeInsets.only(
-                        left: 10,
-                      ),
-                      alignment: Alignment.center,
-                      child:const Text(
-                        "No bills due. Try adding these!",
-                        style:TextStyle(
-                          fontSize: 15,
-                          color:Colors.black,
-                        ),
-                        textAlign:TextAlign.center,
-                      ),
+                  margin:const EdgeInsets.only(
+                    left: 10,
+                  ),
+                  height: 40,
+                  width: 300,
+                  
+                  child:const Text(
+                    "Bills & rechagres",
+                    style:TextStyle(
+                      fontSize: 30,
+                      color:Colors.black,
                     ),
-                          ],
-                        ),
-                        //const Spacer(),
-                        const SizedBox(
-                          width: 100,
-                        ),
+                  ),
+                ),
+                Container(
+                  height: 40,
+                  width: 300,
+                  margin:const EdgeInsets.only(
+                    left: 10,
+                  ),
+                  
+                  alignment: Alignment.centerLeft,
+                  child:const Text(
+                    "No bills due. Try adding these!",
+                    style:TextStyle(
+                      fontSize: 15,
+                      color:Colors.black,
+                    ),
+                    textAlign:TextAlign.left,
+                  ),
+                ),
                       ],
-
                     ),
-                    Row(
+                    const Spacer(),
+                    // const SizedBox(
+                    //   width: 100,
+                    // ),
+                  ],
+                
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+               
+                Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Container(
-                            height: 60,
-                            width: 60,
-                           // color: Colors.red,
-                            alignment: Alignment.center,
-                            decoration:BoxDecoration(
-                              color: Colors.blue.shade300,
-                              borderRadius: BorderRadius.circular(100)
-                            ),
-                            child:const Icon(
-                              Icons.app_registration,
-                              color:Colors.black,
-                              size: 30,
-                            ),
-                          ),
-                          Container(
-                            height: 50,
-                            width:100,
-                          //  color: Colors.green,
-                            alignment: Alignment.center,
-                           
-                            child: const Text(
-                              "Google Play",
-                              style:TextStyle(
-                                color:Colors.black,
-                                fontSize: 18,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ],
+                      Container(
+                        height: 60,
+                        width: 60,
+                       // color: Colors.red,
+                        alignment: Alignment.center,
+                        decoration:BoxDecoration(
+                          color: Colors.blue.shade300,
+                          borderRadius: BorderRadius.circular(100)
+                        ),
+                        child:const Icon(
+                          Icons.app_registration,
+                          color:Colors.black,
+                          size: 30,
+                        ),
                       ),
+                      Container(
+                        height: 50,
+                        width:100,
+                      //  color: Colors.green,
+                        alignment: Alignment.center,
+                       
+                        child: const Text(
+                          "Google Play",
+                          style:TextStyle(
+                            color:Colors.black,
+                            fontSize: 18,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
+                  ),
+                   Column(
+                    children: [
+                      Container(
+                        height: 60,
+                        width: 60,
+                       // color: Colors.red,
+                        alignment: Alignment.center,
+                        decoration:BoxDecoration(
+                          color: Colors.blue.shade300,
+                          borderRadius: BorderRadius.circular(100)
+                        ),
+                        child:const Icon(
+                          Icons.car_crash,
+                          color:Colors.black,
+                          size: 30,
+                        ),
+                      ),
+                      Container(
+                        height: 50,
+                        width:100,
+                        //color: Colors.green,
+                        alignment: Alignment.center,
+                        child: const Text(
+                          "FASTag recharge",
+                          style:TextStyle(
+                            color:Colors.black,
+                            fontSize: 18,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
+                  ),
+                   Column(
+                    children: [
+                      Container(
+                        height: 60,
+                        width: 60,
+                       //color: Colors.red,
+                        alignment: Alignment.center,
+                        decoration:BoxDecoration(
+                          color: Colors.blue.shade300,
+                          borderRadius: BorderRadius.circular(100)
+                        ),
+                        child:const Icon(
+                          Icons.tv,
+                          color:Colors.black,
+                          size: 30,
+                        ),
+                      ),
+                      Container(
+                        height: 50,
+                        width:100,
+                      // color: Colors.green,
+                        alignment: Alignment.center,
+                        child: const Text(
+                          "DHT/Cable TV",
+                          style:TextStyle(
+                            color:Colors.black,
+                            fontSize: 18,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
+                  ),
+                   Column(
+                    children: [
+                      Container(
+                        height: 60,
+                        width: 60,
+                        //color: Colors.red,
+                        alignment: Alignment.center,
+                        decoration:BoxDecoration(
+                          color: Colors.blue.shade300,
+                          borderRadius: BorderRadius.circular(100)
+                        ),
+                        child:const Icon(
+                          Icons.mobile_screen_share_outlined,
+                          color:Colors.black,
+                          size: 30,
+                        ),
+                      ),
+                      Container(
+                        height: 50,
+                        width:100,
+                        //color: Colors.green,
+                        alignment: Alignment.center,
+                        child: const Text(
+                          "Postpaid mobild",
+                          style:TextStyle(
+                            color:Colors.black,
+                            fontSize: 18,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        
+                      ),
+                    ],
+                  ),
+                  
+                          
+                ],
+                ),
+                ],
+                
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+               Container(
+                height: 40,
+                width: 100,
+                padding: const EdgeInsets.all(10),
+                alignment: Alignment.center,
+                decoration:BoxDecoration(
+                  border: Border.all(
+                    color: Colors.black,
+                    width: 1,
+                  ),
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                  child:const Text(
+                    "View all",
+                    style: TextStyle(
+                      fontSize: 15,
+                      color:Color.fromARGB(255, 54, 90, 222),
+                      fontWeight: FontWeight.w500
+                    ),
+                  ),
+                ),
+                 const SizedBox(
+                height: 30,
+              ),
+               Row(
+                    children: [
+                    Container(
+                      margin: const EdgeInsets.only(
+                        left: 20,
+                      ),
+                      height: 30,
+                      width: 200,
+                      alignment:Alignment.center,
+                      child: const Text(
+                        "Offer & rewards",
+                        style:TextStyle(
+                          fontSize: 25,
+                          color: Colors.black,
+                        )
+                      ),
+                    ),
+                    const Spacer(),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  
+                  Row(
+                    mainAxisAlignment:MainAxisAlignment.spaceEvenly,
+                    children: [
                        Column(
                         children: [
                           Container(
                             height: 60,
                             width: 60,
-                           // color: Colors.red,
-                            alignment: Alignment.center,
-                            decoration:BoxDecoration(
-                              color: Colors.blue.shade300,
-                              borderRadius: BorderRadius.circular(100)
+                            decoration: BoxDecoration(
+                              // border: Border.all(
+                              //   color:Colors.grey.shade600,
+                              //   width: 4,
+                              // ),
+                              borderRadius: BorderRadius.circular(100),
+                             
                             ),
-                            child:const Icon(
-                              Icons.car_crash,
-                              color:Colors.black,
-                              size: 30,
+                            clipBehavior: Clip.antiAlias,
+                            alignment: Alignment.center,
+                            child:Image.asset(
+                              "assets/tropy1.jpg"
                             ),
                           ),
                           Container(
-                            height: 50,
-                            width:100,
-                            //color: Colors.green,
-                            alignment: Alignment.center,
-                            child: const Text(
-                              "FASTag recharge",
-                              style:TextStyle(
-                                color:Colors.black,
-                                fontSize: 18,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ],
-                      ),
-                       Column(
-                        children: [
-                          Container(
-                            height: 60,
-                            width: 60,
-                           //color: Colors.red,
-                            alignment: Alignment.center,
-                            decoration:BoxDecoration(
-                              color: Colors.blue.shade300,
-                              borderRadius: BorderRadius.circular(100)
-                            ),
-                            child:const Icon(
-                              Icons.window_outlined,
-                              color:Colors.black,
-                              size: 30,
-                            ),
-                          ),
-                          Container(
-                            height: 50,
+                            height: 30,
                             width:100,
                           // color: Colors.green,
                             alignment: Alignment.center,
                             child: const Text(
-                              "DHT/Cable TV",
+                              "Rewards",
                               style:TextStyle(
                                 color:Colors.black,
                                 fontSize: 18,
+                                overflow: TextOverflow.ellipsis,
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -2134,42 +2287,216 @@ class _GpayState extends State{
                           Container(
                             height: 60,
                             width: 60,
-                            //color: Colors.red,
-                            alignment: Alignment.center,
-                            decoration:BoxDecoration(
-                              color: Colors.blue.shade300,
-                              borderRadius: BorderRadius.circular(100)
+                            decoration: BoxDecoration(
+                              // border: Border.all(
+                              //   color:Colors.grey.shade600,
+                              //   width: 4,
+                              // ),
+                              borderRadius: BorderRadius.circular(100),
+                              color: Colors.blue,
                             ),
-                            child:const Icon(
-                              Icons.mobile_screen_share_outlined,
-                              color:Colors.black,
-                              size: 30,
+                            alignment: Alignment.center,
+                            clipBehavior: Clip.antiAlias,
+                            child:Image.asset(
+                              "assets/pink1.jpg"
                             ),
                           ),
                           Container(
-                            height: 50,
+                            height: 30,
                             width:100,
-                            //color: Colors.green,
+                          // color: Colors.green,
                             alignment: Alignment.center,
                             child: const Text(
-                              "Postpaid mobild",
+                              "Offers",
                               style:TextStyle(
                                 color:Colors.black,
                                 fontSize: 18,
+                                overflow: TextOverflow.ellipsis,
                               ),
                               textAlign: TextAlign.center,
                             ),
-                            
                           ),
                         ],
                       ),
-          
+                       Column(
+                        children: [
+                          Container(
+                            height: 60,
+                            width: 60,
+                            decoration: BoxDecoration(
+                              // border: Border.all(
+                              //   color:Colors.grey.shade600,
+                              //   width: 3,
+                              // ),
+                              borderRadius: BorderRadius.circular(100),
+                              color: Colors.brown.shade500,
+                            ),
+                            clipBehavior: Clip.antiAlias,
+                            alignment: Alignment.center,
+                            child: Image.asset(
+                              "assets/blue.jpg"
+                            )
+                          ),
+                          Container(
+                            height: 30,
+                            width:100,
+                          // color: Colors.green,
+                            alignment: Alignment.center,
+                            child: const Text(
+                              "Referrals",
+                              style:TextStyle(
+                                color:Colors.black,
+                                fontSize: 18,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        width: 70,
+                      ),
+                      
+                  ],
+                  ),
+                  const SizedBox(
+                height: 30,
+              ),
+               Row(
+                    children: [
+                    Container(
+                      margin: const EdgeInsets.only(
+                        left: 20,
+                      ),
+                      height: 30,
+                      width: 200,
+                      alignment:Alignment.center,
+                      child: const Text(
+                        "Manage your money",
+                        style:TextStyle(
+                          fontSize: 25,
+                          color: Colors.black,
+                        )
+                      ),
+                    ),
+                    const Spacer(),
                     ],
                   ),
-                  ],
-                ),
-                ],
-              ),
+                  const SizedBox(
+                    height: 40,
+                  ),
+                   Row(
+                    children: [
+                       const SizedBox(
+                          width: 10,
+                      ),
+                     const Icon(
+                        Icons.speed_sharp,
+                        size: 30,
+                        color:Color.fromARGB(255, 32, 74, 191),
+                      ),
+                       const SizedBox(
+                          width: 10,
+                      ),
+                      Container(
+                        child:const Text(
+                          "Check your CIBIL score for free",
+                          style:TextStyle(
+                            fontSize: 17,
+                            color:Colors.black
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 50,
+                      ),
+                      const Icon(
+                        Icons.arrow_forward_ios_outlined,
+                        size: 20,
+                        color:Colors.black,
+                      ),
+
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 40,
+                  ),
+                   Row(
+                    children: [
+                       const SizedBox(
+                          width: 10,
+                      ),
+                     const Icon(
+                        Icons.restore_outlined,
+                        size: 30,
+                        color:Color.fromARGB(255, 32, 74, 191),
+                      ),
+                       const SizedBox(
+                          width: 10,
+                      ),
+                      Container(
+                        child:const Text(
+                          "See transaction history",
+                          style:TextStyle(
+                            fontSize: 17,
+                            color:Colors.black
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 115,
+                      ),
+                      const Icon(
+                        Icons.arrow_forward_ios_outlined,
+                        size: 20,
+                        color:Colors.black,
+                      ),
+
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 40,
+                  ),
+                   Row(
+                    children: [
+                       const SizedBox(
+                          width: 10,
+                      ),
+                     const Icon(
+                        Icons.account_balance,
+                        size: 30,
+                        color:Color.fromARGB(255, 32, 74, 191),
+                      ),
+                       const SizedBox(
+                          width: 10,
+                      ),
+                      Container(
+                        child:const Text(
+                          "Cheack bank balance",
+                          style:TextStyle(
+                            fontSize: 17,
+                            color:Colors.black
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 130,
+                      ),
+                      const Icon(
+                        Icons.arrow_forward_ios_outlined,
+                        size: 20,
+                        color:Colors.black,
+                      ),
+
+                    ],
+                  ),
+                   const SizedBox(
+                    height: 30,
+                   ),
+                   Image.asset(
+                    "assets/last.jpg"
+                   ),
             ],
           ),
         ),
