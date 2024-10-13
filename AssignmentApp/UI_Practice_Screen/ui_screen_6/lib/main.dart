@@ -30,11 +30,7 @@ class _TextfieldPractice extends State{
   List<Map>infoList=[
     
   ];
-  // Map obj={
-    
-  // };
-  // List<String>playerName=[];
-  // List<String>playerCom=[];
+ 
   @override
   Widget build(BuildContext context){
     return MaterialApp(
