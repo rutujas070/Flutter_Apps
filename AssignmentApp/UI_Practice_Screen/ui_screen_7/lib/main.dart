@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'title_row.dart';
 
 void main(){
   runApp(const MyApp());
@@ -217,761 +218,42 @@ class _ZeptoCloneState extends State{
                   const SizedBox(
                     width: 15,
                   ),
-                  Column(
-                   crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        height: 120,
-                        width: 120,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: Colors.grey.shade300,
-                            width: 1,
-                          ),
-                          color: Colors.purple.shade100,
-                        ),
-                        clipBehavior: Clip.antiAlias,
-                        child: Stack(
-                          children: [
-                            Image.asset(
-                              "assets/images/OIP (1).jpg",
-                              height: 120,
-                              width: 120,
-                              fit: BoxFit.fill,
-                            ),
-                            Container(
-                              height: 40,
-                              width: 40,
-                              color: Colors.purple,
-                              alignment: Alignment.centerLeft,
-                              padding: const EdgeInsets.only(
-                                left: 3,
-                                bottom: 2,
-                              ),
-                              child: const Text(
-                                "20% Off",
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                textAlign: TextAlign.left,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height:40,
-                        width: 120,
-                        child: const Text(
-                          "Zoff Foods Cumin Whole",
-                          style:TextStyle(
-                            fontSize: 15,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                      // const SizedBox(
-                      //   height: 4,
-                      // ),
-                      Container(
-                        height:20,
-                        width: 120,
-                        alignment: Alignment.centerLeft,
-                        child:Text(
-                          "100 g",
-                          style:TextStyle(
-                            fontSize: 15,
-                            color:Colors.grey.shade500,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      Container(
-                        height:30,
-                        width: 140,
-                        padding: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.amber.shade100,
-                        ),
-                        alignment: Alignment.centerLeft,
-                        child:const Row(
-                          children: [
-                           Icon(
-                              Icons.report_gmailerrorred_outlined,
-                              size: 19,
-                              color: Color.fromARGB(255, 194, 158, 27),
-                            ),
-                          Text(
-                          "Get for 63",
-                          style:TextStyle(
-                            fontSize: 15,
-                            color:Colors.black,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          ),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Icon(
-                              Icons.arrow_drop_down,
-                              size: 15,
-                              color: Colors.black,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height:30,
-                        width: 120,
-                        alignment: Alignment.centerLeft,
-                        child: const Text(
-                          "199",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: 30,
-                        width: 150,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.red,
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: const Text(
-                          "Add to Cart",
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.red,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      
-                    ],
-                  ),
+                  scrolingRowContainer(imageLink: "assets/images/OIP (1).jpg", discount: 30, weight: "150 g", prise: 299, discountPrise: 63, nameOfproduct: "Zoff Foods Cumin Whole"),
+
                   const SizedBox(
                     width:30,
                   ),
-                  Column(
-                   crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        height: 120,
-                        width: 120,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: Colors.grey.shade300,
-                            width: 1,
-                          ),
-                          color: Colors.purple.shade100,
-                        ),
-                        clipBehavior: Clip.antiAlias,
-                        child: Stack(
-                          children: [
-                            Image.asset(
-                              "assets/images/OIP (1).jpg",
-                              height: 120,
-                              width: 120,
-                              fit: BoxFit.fill,
-                            ),
-                            Container(
-                              height: 40,
-                              width: 40,
-                              color: Colors.purple,
-                              alignment: Alignment.centerLeft,
-                              padding: const EdgeInsets.only(
-                                left: 3,
-                                bottom: 2,
-                              ),
-                              child: const Text(
-                                "20% Off",
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                textAlign: TextAlign.left,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height:40,
-                        width: 120,
-                        child: const Text(
-                          "Zoff Foods Cumin Whole",
-                          style:TextStyle(
-                            fontSize: 15,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                      // const SizedBox(
-                      //   height: 4,
-                      // ),
-                      Container(
-                        height:20,
-                        width: 120,
-                        alignment: Alignment.centerLeft,
-                        child:Text(
-                          "100 g",
-                          style:TextStyle(
-                            fontSize: 15,
-                            color:Colors.grey.shade500,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      Container(
-                        height:30,
-                        width: 140,
-                        padding: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.amber.shade100,
-                        ),
-                        alignment: Alignment.centerLeft,
-                        child:const Row(
-                          children: [
-                           Icon(
-                              Icons.report_gmailerrorred_outlined,
-                              size: 19,
-                              color: Color.fromARGB(255, 194, 158, 27),
-                            ),
-                          Text(
-                          "Get for 63",
-                          style:TextStyle(
-                            fontSize: 15,
-                            color:Colors.black,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          ),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Icon(
-                              Icons.arrow_drop_down,
-                              size: 15,
-                              color: Colors.black,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height:30,
-                        width: 120,
-                        alignment: Alignment.centerLeft,
-                        child: const Text(
-                          "199",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: 30,
-                        width: 150,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.red,
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: const Text(
-                          "Add to Cart",
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.red,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      
-                    ],
-                  ),
+
+                  scrolingRowContainer(imageLink: "assets/images/OIP (2).jpg", discount: 10, weight: "100 g", prise: 139, discountPrise: 63, nameOfproduct: "Zoff Foods Cumin Whole"),
+
                   const SizedBox(
                     width:30,
                   ),
-                  Column(
-                   crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        height: 120,
-                        width: 120,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: Colors.grey.shade300,
-                            width: 1,
-                          ),
-                          color: Colors.purple.shade100,
-                        ),
-                        clipBehavior: Clip.antiAlias,
-                        child: Stack(
-                          children: [
-                            Image.asset(
-                              "assets/images/OIP (1).jpg",
-                              height: 120,
-                              width: 120,
-                              fit: BoxFit.fill,
-                            ),
-                            Container(
-                              height: 40,
-                              width: 40,
-                              color: Colors.purple,
-                              alignment: Alignment.centerLeft,
-                              padding: const EdgeInsets.only(
-                                left: 3,
-                                bottom: 2,
-                              ),
-                              child: const Text(
-                                "20% Off",
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                textAlign: TextAlign.left,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height:40,
-                        width: 120,
-                        child: const Text(
-                          "Zoff Foods Cumin Whole",
-                          style:TextStyle(
-                            fontSize: 15,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                      // const SizedBox(
-                      //   height: 4,
-                      // ),
-                      Container(
-                        height:20,
-                        width: 120,
-                        alignment: Alignment.centerLeft,
-                        child:Text(
-                          "100 g",
-                          style:TextStyle(
-                            fontSize: 15,
-                            color:Colors.grey.shade500,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      Container(
-                        height:30,
-                        width: 140,
-                        padding: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.amber.shade100,
-                        ),
-                        alignment: Alignment.centerLeft,
-                        child:const Row(
-                          children: [
-                           Icon(
-                              Icons.report_gmailerrorred_outlined,
-                              size: 19,
-                              color: Color.fromARGB(255, 194, 158, 27),
-                            ),
-                          Text(
-                          "Get for 63",
-                          style:TextStyle(
-                            fontSize: 15,
-                            color:Colors.black,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          ),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Icon(
-                              Icons.arrow_drop_down,
-                              size: 15,
-                              color: Colors.black,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height:30,
-                        width: 120,
-                        alignment: Alignment.centerLeft,
-                        child: const Text(
-                          "199",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: 30,
-                        width: 150,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.red,
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: const Text(
-                          "Add to Cart",
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.red,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      
-                    ],
-                  ),
+
+                  scrolingRowContainer(imageLink: "assets/images/OIP (3).jpg", discount: 15, weight: "100 g", prise: 109, discountPrise: 63, nameOfproduct: "Zoff Foods Cumin Whole"),
+
                   const SizedBox(
                     width:30,
                   ),
-                  Column(
-                   crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        height: 120,
-                        width: 120,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: Colors.grey.shade300,
-                            width: 1,
-                          ),
-                          color: Colors.purple.shade100,
-                        ),
-                        clipBehavior: Clip.antiAlias,
-                        child: Stack(
-                          children: [
-                            Image.asset(
-                              "assets/images/OIP (1).jpg",
-                              height: 120,
-                              width: 120,
-                              fit: BoxFit.fill,
-                            ),
-                            Container(
-                              height: 40,
-                              width: 40,
-                              color: Colors.purple,
-                              alignment: Alignment.centerLeft,
-                              padding: const EdgeInsets.only(
-                                left: 3,
-                                bottom: 2,
-                              ),
-                              child: const Text(
-                                "20% Off",
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                textAlign: TextAlign.left,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height:40,
-                        width: 120,
-                        child: const Text(
-                          "Zoff Foods Cumin Whole",
-                          style:TextStyle(
-                            fontSize: 15,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                      // const SizedBox(
-                      //   height: 4,
-                      // ),
-                      Container(
-                        height:20,
-                        width: 120,
-                        alignment: Alignment.centerLeft,
-                        child:Text(
-                          "100 g",
-                          style:TextStyle(
-                            fontSize: 15,
-                            color:Colors.grey.shade500,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      Container(
-                        height:30,
-                        width: 140,
-                        padding: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.amber.shade100,
-                        ),
-                        alignment: Alignment.centerLeft,
-                        child:const Row(
-                          children: [
-                           Icon(
-                              Icons.report_gmailerrorred_outlined,
-                              size: 19,
-                              color: Color.fromARGB(255, 194, 158, 27),
-                            ),
-                          Text(
-                          "Get for 63",
-                          style:TextStyle(
-                            fontSize: 15,
-                            color:Colors.black,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          ),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Icon(
-                              Icons.arrow_drop_down,
-                              size: 15,
-                              color: Colors.black,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height:30,
-                        width: 120,
-                        alignment: Alignment.centerLeft,
-                        child: const Text(
-                          "199",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: 30,
-                        width: 150,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.red,
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: const Text(
-                          "Add to Cart",
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.red,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      
-                    ],
-                  ),
+
+                  scrolingRowContainer(imageLink: "assets/images/OIP (4).jpg", discount: 30, weight: "100 g", prise: 123, discountPrise: 63, nameOfproduct: "Zoff Foods Cumin Whole"),
+
                   const SizedBox(
                     width:30,
                   ),
-                  Column(
-                   crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        height: 120,
-                        width: 120,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: Colors.grey.shade300,
-                            width: 1,
-                          ),
-                          color: Colors.purple.shade100,
-                        ),
-                        clipBehavior: Clip.antiAlias,
-                        child: Stack(
-                          children: [
-                            Image.asset(
-                              "assets/images/OIP (1).jpg",
-                              height: 120,
-                              width: 120,
-                              fit: BoxFit.fill,
-                            ),
-                            Container(
-                              height: 40,
-                              width: 40,
-                              color: Colors.purple,
-                              alignment: Alignment.centerLeft,
-                              padding: const EdgeInsets.only(
-                                left: 3,
-                                bottom: 2,
-                              ),
-                              child: const Text(
-                                "20% Off",
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                textAlign: TextAlign.left,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height:40,
-                        width: 120,
-                        child: const Text(
-                          "Zoff Foods Cumin Whole",
-                          style:TextStyle(
-                            fontSize: 15,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                      // const SizedBox(
-                      //   height: 4,
-                      // ),
-                      Container(
-                        height:20,
-                        width: 120,
-                        alignment: Alignment.centerLeft,
-                        child:Text(
-                          "100 g",
-                          style:TextStyle(
-                            fontSize: 15,
-                            color:Colors.grey.shade500,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      Container(
-                        height:30,
-                        width: 140,
-                        padding: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.amber.shade100,
-                        ),
-                        alignment: Alignment.centerLeft,
-                        child:const Row(
-                          children: [
-                           Icon(
-                              Icons.report_gmailerrorred_outlined,
-                              size: 19,
-                              color: Color.fromARGB(255, 194, 158, 27),
-                            ),
-                          Text(
-                          "Get for 63",
-                          style:TextStyle(
-                            fontSize: 15,
-                            color:Colors.black,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          ),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Icon(
-                              Icons.arrow_drop_down,
-                              size: 15,
-                              color: Colors.black,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height:30,
-                        width: 120,
-                        alignment: Alignment.centerLeft,
-                        child: const Text(
-                          "199",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: 30,
-                        width: 150,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.red,
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: const Text(
-                          "Add to Cart",
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.red,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      
-                    ],
-                  ),
+
+                  scrolingRowContainer(imageLink: "assets/images/OIP (5).jpg", discount: 40, weight: "90 g", prise: 99, discountPrise: 63, nameOfproduct: "Zoff Foods Cumin Whole"),
+
                   const SizedBox(
                     width:30,
                   ),
+
+                  scrolingRowContainer(imageLink: "assets/images/OIP (6).jpg", discount: 20, weight: "200 g", prise: 399, discountPrise: 63, nameOfproduct: "Zoff Foods Cumin Whole"),
+
+                  const SizedBox(
+                    width:30,
+                  ),
+                                   
                 ],
               ),
             ),
@@ -980,1386 +262,208 @@ class _ZeptoCloneState extends State{
               height: 40,
             ),
         
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  height: 30,
-                  width: 200,
-                  margin: const EdgeInsets.only(
-                    left: 20,
-                  ),
-                  alignment: Alignment.centerLeft,
-                  child: const Text(
-                    "Grocery & Kitchen",
-                    style:TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                      color:Colors.black,
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
-                ),
-                
-              ],
-              ),
-            
+            fun("Grocery & Kitchen"),
+
             Row(
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: 70,
-                      width: 160,
-                      margin: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red
-                      ),
-                      child: Image.asset(
-                        "assets/images/OIP (8).jpg",
-                        height: 60,
-                        width: 150,
-                        fit:BoxFit.fill
-                      ),
-                    ),
-                    // const SizedBox(
-                    //   height: 5,
-                    // ),
-                    Container(
-                      height: 45,
-                      width: 100,
-                      child: const Text(
-                        "Fruits & Vegetales",
-                        style:TextStyle(
-                          fontSize: 15,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-                
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height:70,
-                      width:70,
-                      clipBehavior: Clip.antiAlias,
-                      margin: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red
-                      ),
-                      child:Image.asset(
-                        "assets/images/brad.webp",
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      width: 60,
-                      child: const Text(
-                        "Dairy, Bread & Eggs",
-                        style:TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color:Colors.black
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-                
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height:70,
-                      width:70,
-                      clipBehavior: Clip.antiAlias,
-                      margin: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red
-                      ),
-                      child:Image.asset(
-                        "assets/images/brad.webp",
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      width: 60,
-                      child: const Text(
-                        "Dairy, Bread & Eggs",
-                        style:TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color:Colors.black
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
+                bigColumn("assets/images/OIP (8).jpg", "fruits & Vegetables"),
+                smallColumn("assets/images/brad.webp", "Dairy, Bread & Eggs"),
+                smallColumn("assets/images/Atta.jpg", "Atta,Rice, oil & Dals"),
+               
               ],
             ),
         
             Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height:70,
-                      width:70,
-                      clipBehavior: Clip.antiAlias,
-                      margin: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red
-                      ),
-                      child:Image.asset(
-                        "assets/images/brad.webp",
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      width: 60,
-                      child: const Text(
-                        "Dairy, Bread & Eggs",
-                        style:TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color:Colors.black
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-             
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height:70,
-                      width:70,
-                      clipBehavior: Clip.antiAlias,
-                      margin: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red
-                      ),
-                      child:Image.asset(
-                        "assets/images/brad.webp",
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      width: 60,
-                      child: const Text(
-                        "Dairy, Bread & Eggs",
-                        style:TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color:Colors.black
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-              
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height:70,
-                      width:70,
-                      clipBehavior: Clip.antiAlias,
-                      margin: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red
-                      ),
-                      child:Image.asset(
-                        "assets/images/brad.webp",
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      width: 60,
-                      child: const Text(
-                        "Dairy, Bread & Eggs",
-                        style:TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color:Colors.black
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-              
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height:70,
-                      width:70,
-                      clipBehavior: Clip.antiAlias,
-                      margin: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red
-                      ),
-                      child:Image.asset(
-                        "assets/images/brad.webp",
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      width: 60,
-                      child: const Text(
-                        "Dairy, Bread & Eggs",
-                        style:TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color:Colors.black
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+             children: [
+              smallColumn("assets/images/mf.jpg", "Meats, Fish & Eggs"),
+              smallColumn("assets/images/mf.jpg", "Masala & Dry Fruits"),
+              smallColumn("assets/images/oil.jpg", "Breakfast & Sauces"),
+              smallColumn("assets/images/magii.jpg", "Packaged Food"),
+             ],
             ),
         
             const SizedBox(
               height: 20,
             ),
             
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  height: 30,
-                  width: 200,
-                  margin: const EdgeInsets.only(
-                    left: 20,
-                  ),
-                  alignment: Alignment.centerLeft,
-                  child: const Text(
-                    "Snacks & Drinks",
-                    style:TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                      color:Colors.black,
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
-                ),
-                
-              ],
-              ),
-            
-            Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: 70,
-                      width: 160,
-                      margin: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red
-                      ),
-                      child: Image.asset(
-                        "assets/images/OIP (8).jpg",
-                        height: 60,
-                        width: 150,
-                        fit:BoxFit.fill
-                      ),
-                    ),
-                    // const SizedBox(
-                    //   height: 5,
-                    // ),
-                    Container(
-                      height: 45,
-                      width: 100,
-                      child: const Text(
-                        "Fruits & Vegetales",
-                        style:TextStyle(
-                          fontSize: 15,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-                
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height:70,
-                      width:70,
-                      clipBehavior: Clip.antiAlias,
-                      margin: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red
-                      ),
-                      child:Image.asset(
-                        "assets/images/brad.webp",
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      width: 60,
-                      child: const Text(
-                        "Dairy, Bread & Eggs",
-                        style:TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color:Colors.black
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-                
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height:70,
-                      width:70,
-                      clipBehavior: Clip.antiAlias,
-                      margin: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red
-                      ),
-                      child:Image.asset(
-                        "assets/images/brad.webp",
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      width: 60,
-                      child: const Text(
-                        "Dairy, Bread & Eggs",
-                        style:TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color:Colors.black
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+            fun("Snacka & Drinks"),
             
              Row(
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height:70,
-                      width:70,
-                      clipBehavior: Clip.antiAlias,
-                      margin: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red
-                      ),
-                      child:Image.asset(
-                        "assets/images/brad.webp",
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      width: 60,
-                      child: const Text(
-                        "Dairy, Bread & Eggs",
-                        style:TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color:Colors.black
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-             
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height:70,
-                      width:70,
-                      clipBehavior: Clip.antiAlias,
-                      margin: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red
-                      ),
-                      child:Image.asset(
-                        "assets/images/brad.webp",
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      width: 60,
-                      child: const Text(
-                        "Dairy, Bread & Eggs",
-                        style:TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color:Colors.black
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-              
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height:70,
-                      width:70,
-                      clipBehavior: Clip.antiAlias,
-                      margin: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red
-                      ),
-                      child:Image.asset(
-                        "assets/images/brad.webp",
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      width: 60,
-                      child: const Text(
-                        "Dairy, Bread & Eggs",
-                        style:TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color:Colors.black
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-              
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height:70,
-                      width:70,
-                      clipBehavior: Clip.antiAlias,
-                      margin: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red
-                      ),
-                      child:Image.asset(
-                        "assets/images/brad.webp",
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      width: 60,
-                      child: const Text(
-                        "Dairy, Bread & Eggs",
-                        style:TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color:Colors.black
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
+                bigColumn("assets/images/tea.jpg", "Tea, Coffee & More"),
+                smallColumn("assets/images/oil.jpg", "Ice Creams & More"),
+                smallColumn("assets/images/magii.jpg", "Frozen Food"),
+               
               ],
+            ),
+        
+            Row(
+             children: [
+              smallColumn("assets/images/chocolate.jpg", "Sweet Cravings"),
+              smallColumn("assets/images/tea.jpg", "Cold Drinks & Juices"),
+              smallColumn("assets/images/magii.jpg", "Munchies"),
+              smallColumn("assets/images/tost.jpg", "Biscuits & Cookies"),
+             ],
             ),
             
             const SizedBox(
               height: 40,
             ),
-        
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+
+             fun("Beauty & personal Care"),
+             Row(
               children: [
-                Container(
-                  height: 30,
-                  width: 200,
-                  margin: const EdgeInsets.only(
-                    left: 20,
-                  ),
-                  alignment: Alignment.centerLeft,
-                  child: const Text(
-                    "Beauty & Personal Care",
-                    style:TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                      color:Colors.black,
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
-                ),
-                
-              ],
-              ),
-            
-            Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: 70,
-                      width: 160,
-                      margin: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red
-                      ),
-                      child: Image.asset(
-                        "assets/images/OIP (8).jpg",
-                        height: 60,
-                        width: 150,
-                        fit:BoxFit.fill
-                      ),
-                    ),
-                    // const SizedBox(
-                    //   height: 5,
-                    // ),
-                    Container(
-                      height: 45,
-                      width: 100,
-                      child: const Text(
-                        "Fruits & Vegetales",
-                        style:TextStyle(
-                          fontSize: 15,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-                
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height:70,
-                      width:70,
-                      clipBehavior: Clip.antiAlias,
-                      margin: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red
-                      ),
-                      child:Image.asset(
-                        "assets/images/brad.webp",
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      width: 60,
-                      child: const Text(
-                        "Dairy, Bread & Eggs",
-                        style:TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color:Colors.black
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-                
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height:70,
-                      width:70,
-                      clipBehavior: Clip.antiAlias,
-                      margin: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red
-                      ),
-                      child:Image.asset(
-                        "assets/images/brad.webp",
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      width: 60,
-                      child: const Text(
-                        "Dairy, Bread & Eggs",
-                        style:TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color:Colors.black
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
+                bigColumn("assets/images/mecup.jpg", "Makeup & Beauty"),
+                smallColumn("assets/images/nivea.jpg", "Skincare"),
+                smallColumn("assets/images/OIP (1).jpg", "Baby Care"),
+               
               ],
             ),
         
             Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height:70,
-                      width:70,
-                      clipBehavior: Clip.antiAlias,
-                      margin: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red
-                      ),
-                      child:Image.asset(
-                        "assets/images/brad.webp",
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      width: 60,
-                      child: const Text(
-                        "Dairy, Bread & Eggs",
-                        style:TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color:Colors.black
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-             
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height:70,
-                      width:70,
-                      clipBehavior: Clip.antiAlias,
-                      margin: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red
-                      ),
-                      child:Image.asset(
-                        "assets/images/brad.webp",
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      width: 60,
-                      child: const Text(
-                        "Dairy, Bread & Eggs",
-                        style:TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color:Colors.black
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-              
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height:70,
-                      width:70,
-                      clipBehavior: Clip.antiAlias,
-                      margin: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red
-                      ),
-                      child:Image.asset(
-                        "assets/images/brad.webp",
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      width: 60,
-                      child: const Text(
-                        "Dairy, Bread & Eggs",
-                        style:TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color:Colors.black
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-              
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height:70,
-                      width:70,
-                      clipBehavior: Clip.antiAlias,
-                      margin: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red
-                      ),
-                      child:Image.asset(
-                        "assets/images/brad.webp",
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      width: 60,
-                      child: const Text(
-                        "Dairy, Bread & Eggs",
-                        style:TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color:Colors.black
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+             children: [
+              smallColumn("assets/images/colgate.jpg", "Bath & Body"),
+              smallColumn("assets/images/oil.jpg", "Hair Care"),
+              smallColumn("assets/images/nivea.jpg", "Jewellery & Accessories"),
+              smallColumn("assets/images/glasses.jpg", "Apparel & Lifestyle"),
+             ],
             ),
             
             Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height:70,
-                      width:70,
-                      clipBehavior: Clip.antiAlias,
-                      margin: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red
-                      ),
-                      child:Image.asset(
-                        "assets/images/brad.webp",
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      width: 60,
-                      child: const Text(
-                        "Dairy, Bread & Eggs",
-                        style:TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color:Colors.black
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-             
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height:70,
-                      width:70,
-                      clipBehavior: Clip.antiAlias,
-                      margin: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red
-                      ),
-                      child:Image.asset(
-                        "assets/images/brad.webp",
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      width: 60,
-                      child: const Text(
-                        "Dairy, Bread & Eggs",
-                        style:TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color:Colors.black
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-              
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height:70,
-                      width:70,
-                      clipBehavior: Clip.antiAlias,
-                      margin: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red
-                      ),
-                      child:Image.asset(
-                        "assets/images/brad.webp",
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      width: 60,
-                      child: const Text(
-                        "Dairy, Bread & Eggs",
-                        style:TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color:Colors.black
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-              
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height:70,
-                      width:70,
-                      clipBehavior: Clip.antiAlias,
-                      margin: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red
-                      ),
-                      child:Image.asset(
-                        "assets/images/brad.webp",
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      width: 60,
-                      child: const Text(
-                        "Dairy, Bread & Eggs",
-                        style:TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color:Colors.black
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+             children: [
+              smallColumn("assets/images/tea.jpg", "Grooming Essentials"),
+              smallColumn("assets/images/glasses.jpg", "Pharma & Wellness"),
+              smallColumn("assets/images/girls.jpg", "Feminine Hygiene"),
+              smallColumn("assets/images/girls.jpg", "Sexual Wellness"),
+             ],
             ),
 
             const SizedBox(
               height: 20,
             ),
 
-             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  height: 30,
-                  width: 200,
-                  margin: const EdgeInsets.only(
-                    left: 20,
-                  ),
-                  alignment: Alignment.centerLeft,
-                  child: const Text(
-                    "Household Essentials",
-                    style:TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                      color:Colors.black,
+             fun("Household Essentials"),
+               Row(
+             children: [
+              smallColumn("assets/images/mof.jpg", "Home Needs"),
+              smallColumn("assets/images/Mixer.jpg", "Kitchenware & Appliances"),
+              smallColumn("assets/images/arial.jpg", "Cleaning Essentials"),
+              smallColumn("assets/images/electronic.png", "Electronics & Appliances"),
+             ],
+            ),
+            Row(
+             children: [
+              smallColumn("assets/images/brad.webp", "Pet Care"),
+              smallColumn("assets/images/toys.png", "Toys & Sports"),
+              smallColumn("assets/images/book.jpg", "Stationery & Crafts"),
+              smallColumn("assets/images/eno.jpg", "paan Corner"),
+             ],
+            ),
+            const SizedBox(
+              height: 40,
+            ),
+            Container(
+              color: Colors.blue.shade100,
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    height: 25,
+                    width: 200,
+                    margin: const EdgeInsets.only(
+                      left: 15,
                     ),
-                    textAlign: TextAlign.left,
+                    alignment: Alignment.centerLeft,
+                    child:Text(
+                      "New in Store",
+                      style:TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color:Colors.blue.shade800,
+                      ),
+                      textAlign: TextAlign.left,
+                    ),
                   ),
-                ),
-                
-              ],
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      newStoreContainer("Toys", 70, "assets/images/toys.png"),
+                      newStoreContainer("Fashion", 40, "assets/images/glasses.jpg"),
+                      newStoreContainer("Home", 90, "assets/images/home.webp"),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      newStoreContainer("Makeup", 50, "assets/images/mecup.jpg"),
+                      newStoreContainer("Electronics", 30, "assets/images/electronic.png"),
+                      newStoreContainer("Kitchen", 60, "assets/images/Mixer.jpg"),
+                    ],
+                  ),
+                ],
               ),
-             
-              Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height:70,
-                      width:70,
-                      clipBehavior: Clip.antiAlias,
-                      margin: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red
-                      ),
-                      child:Image.asset(
-                        "assets/images/brad.webp",
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      width: 60,
-                      child: const Text(
-                        "Dairy, Bread & Eggs",
-                        style:TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color:Colors.black
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-             
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height:70,
-                      width:70,
-                      clipBehavior: Clip.antiAlias,
-                      margin: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red
-                      ),
-                      child:Image.asset(
-                        "assets/images/brad.webp",
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      width: 60,
-                      child: const Text(
-                        "Dairy, Bread & Eggs",
-                        style:TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color:Colors.black
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-              
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height:70,
-                      width:70,
-                      clipBehavior: Clip.antiAlias,
-                      margin: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red
-                      ),
-                      child:Image.asset(
-                        "assets/images/brad.webp",
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      width: 60,
-                      child: const Text(
-                        "Dairy, Bread & Eggs",
-                        style:TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color:Colors.black
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-              
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height:70,
-                      width:70,
-                      clipBehavior: Clip.antiAlias,
-                      margin: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red
-                      ),
-                      child:Image.asset(
-                        "assets/images/brad.webp",
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      width: 60,
-                      child: const Text(
-                        "Dairy, Bread & Eggs",
-                        style:TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color:Colors.black
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
             ),
 
-             Row(
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height:70,
-                      width:70,
-                      clipBehavior: Clip.antiAlias,
-                      margin: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red
-                      ),
-                      child:Image.asset(
-                        "assets/images/brad.webp",
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      width: 60,
-                      child: const Text(
-                        "Dairy, Bread & Eggs",
-                        style:TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color:Colors.black
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-             
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height:70,
-                      width:70,
-                      clipBehavior: Clip.antiAlias,
-                      margin: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red
-                      ),
-                      child:Image.asset(
-                        "assets/images/brad.webp",
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      width: 60,
-                      child: const Text(
-                        "Dairy, Bread & Eggs",
-                        style:TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color:Colors.black
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-              
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height:70,
-                      width:70,
-                      clipBehavior: Clip.antiAlias,
-                      margin: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red
-                      ),
-                      child:Image.asset(
-                        "assets/images/brad.webp",
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      width: 60,
-                      child: const Text(
-                        "Dairy, Bread & Eggs",
-                        style:TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color:Colors.black
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-              
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height:70,
-                      width:70,
-                      clipBehavior: Clip.antiAlias,
-                      margin: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red
-                      ),
-                      child:Image.asset(
-                        "assets/images/brad.webp",
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      width: 60,
-                      child: const Text(
-                        "Dairy, Bread & Eggs",
-                        style:TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color:Colors.black
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
+                scrolingRowContainer(imageLink: "assets/images/OIP (1).jpg", discount: 30, weight: "100 g", prise: 199, discountPrise: 63, nameOfproduct: "Zoff Foods Cumin Whole"),
+
+                scrolingRowContainer(imageLink: "assets/images/OIP (3).jpg", discount: 30, weight: "100 g", prise: 199, discountPrise: 63, nameOfproduct: "Zoff Foods Cumin Whole"),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                scrolingRowContainer(imageLink: "assets/images/masala2.jpg", discount: 30, weight: "100 g", prise: 199, discountPrise: 63, nameOfproduct: "Zoff Foods Cumin Whole"),
+
+                scrolingRowContainer(imageLink: "assets/images/masala3.jpg", discount: 30, weight: "100 g", prise: 199, discountPrise: 63, nameOfproduct: "Zoff Foods Cumin Whole"),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                scrolingRowContainer(imageLink: "assets/images/OIP (1).jpg", discount: 30, weight: "100 g", prise: 199, discountPrise: 63, nameOfproduct: "Zoff Foods Cumin Whole"),
+
+                scrolingRowContainer(imageLink: "assets/images/OIP (2).jpg", discount: 30, weight: "100 g", prise: 199, discountPrise: 63, nameOfproduct: "Zoff Foods Cumin Whole"),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                scrolingRowContainer(imageLink: "assets/images/OIP (3).jpg", discount: 30, weight: "100 g", prise: 199, discountPrise: 63, nameOfproduct: "Zoff Foods Cumin Whole"),
+
+                scrolingRowContainer(imageLink: "assets/images/OIP (4).jpg", discount: 30, weight: "100 g", prise: 199, discountPrise: 63, nameOfproduct: "Zoff Foods Cumin Whole"),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                scrolingRowContainer(imageLink: "assets/images/OIP (4).jpg", discount: 30, weight: "100 g", prise: 199, discountPrise: 63, nameOfproduct: "Zoff Foods Cumin Whole"),
+
+                scrolingRowContainer(imageLink: "assets/images/OIP (6).jpg", discount: 30, weight: "100 g", prise: 199, discountPrise: 63, nameOfproduct: "Zoff Foods Cumin Whole"),
               ],
             ),
           ],
