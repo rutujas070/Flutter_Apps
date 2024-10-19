@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:ui_screen_5/todo_model.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 
 void main(){
@@ -13,6 +15,7 @@ class MyApp extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       title:"to-do_App",
       home:ToDoApp(),
     );
@@ -30,36 +33,53 @@ class _ToDoAppState extends State{
     const Color.fromRGBO(250, 249, 232, 1),
     const Color.fromRGBO(250, 232, 250, 1)
   ];
-  int count=0;
-  int count1=0;
-  List<Map>todoList=[];
+ 
+  List<TodoModel>taskList=[];
   TextEditingController titleController=TextEditingController();
   TextEditingController descriptionController=TextEditingController();
   TextEditingController dateController=TextEditingController();
-  String?title;
-  String?description;
-  String?date;
-  void downSheet(){
+  void submitData(bool isEdit1,[TodoModel? obj1]){
+    if(titleController.text.trim().isNotEmpty&&
+    descriptionController.text.trim().isNotEmpty&&
+    dateController.text.trim().isNotEmpty){
+      if(isEdit1){
+        obj1!.title=titleController.text;
+        obj1.description=descriptionController.text;
+        obj1.date=dateController.text;
+      }else{
+        taskList.add(
+          TodoModel(title: titleController.text, description: descriptionController.text, date: dateController.text)
+        );
+      }
+    }
+  }
+  void clearController(){
+    titleController.clear();
+    descriptionController.clear();
+    dateController.clear();
+  }
+  void downSheet(bool isEdit,[TodoModel? obj]){
     showModalBottomSheet(
       context: context, 
+      isScrollControlled: true,
       builder: (context){
         return Column(
+          mainAxisSize:MainAxisSize.min,
           children: [
             Container(
               height: 28,
-              width: 140,
+              width: 160,
               margin:EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom,
                 top: 10,
                 left: 10,
                 right: 10,
               ),
-              child: const Text(
+              child: Text(
                 "Create To-Do",
-                style:TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: "Quicksand",
+                style:GoogleFonts.quicksand(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 22
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -71,18 +91,18 @@ class _ToDoAppState extends State{
                 top:10,
                 bottom: MediaQuery.of(context).viewInsets.bottom,
               ),
-              child: const Text(
+              child:Text(
                 "Title",
-                style:TextStyle(
+                style:GoogleFonts.quicksand(
                   fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color:Color.fromRGBO(2,167,177,1),
+                  fontWeight: FontWeight.w700,
+                  color:const Color.fromRGBO(2,167,177,1),
                 ),
                 textAlign: TextAlign.left,
               ),
             ),
             Container(
-              height: 60,
+              height: 50,
                width: MediaQuery.of(context).size.width,
                margin:EdgeInsets.only(
                 left: 15,
@@ -91,19 +111,31 @@ class _ToDoAppState extends State{
                ),
                child: TextField(
                 controller:titleController,
-                style:const TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.black,
-                ),
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  hintText: "Enter Title",
-                  hintStyle: TextStyle(
+                style:GoogleFonts.quicksand(
                     fontSize: 20,
-                    color: Colors.grey.shade400,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black,
+                  ),
+                decoration: InputDecoration(
+                  enabledBorder:const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10)
+                    ),
+                    borderSide: BorderSide(
+                      color: Colors.black, 
+                     width: 1.0,
+                    ),
+                   ),
+                   focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color.fromRGBO(2,167,177,1), // Border color when focused
+                        width: 1.0,
+                      ),
+                    ),
+                  hintText: "Enter Title",
+                  hintStyle: GoogleFonts.quicksand(
+                    fontSize: 20,
+                    color: Colors.grey.shade600,
                   ),
                 ),
                 textAlign: TextAlign.left,
@@ -116,18 +148,18 @@ class _ToDoAppState extends State{
                 top: 20,
                 bottom: MediaQuery.of(context).viewInsets.bottom,
                 ),
-              child: const Text(
+              child:Text(
                 "Description",
-                style:TextStyle(
+                 style:GoogleFonts.quicksand(
                   fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color:Color.fromRGBO(2,167,177,1),
+                  fontWeight: FontWeight.w700,
+                  color:const Color.fromRGBO(2,167,177,1),
                 ),
                 textAlign: TextAlign.left,
               ),
             ),
              Container(
-              //height: 50,
+              height: 50,
               width: MediaQuery.of(context).size.width,
                margin:EdgeInsets.only(
                 left: 15,
@@ -136,20 +168,33 @@ class _ToDoAppState extends State{
                ),
                child: TextField(
                 controller:descriptionController,
-                style:const TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.black,
-                ),
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  hintText: "Enter Description",
-                  hintStyle: TextStyle(
+                 style:GoogleFonts.quicksand(
                     fontSize: 20,
-                    color: Colors.grey.shade400,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black,
                   ),
+                decoration: InputDecoration(
+                  enabledBorder:const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10)
+                    ),
+                    borderSide: BorderSide(
+                      color: Colors.black, 
+                     width: 1.0,
+                    ),
+                   ),
+                   focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color.fromRGBO(2,167,177,1), // Border color when focused
+                        width: 1.0,
+                      ),
+                    ),
+                  hintText: "Enter Description",
+                  hintStyle:GoogleFonts.quicksand(
+                    fontSize: 20,
+                    color:Colors.grey.shade600
+                  ),
+                 
                 ),
                 textAlign: TextAlign.left,
                ),
@@ -161,18 +206,18 @@ class _ToDoAppState extends State{
                 top: 20,
                 bottom: MediaQuery.of(context).viewInsets.bottom,
                 ),
-              child: const Text(
+              child:Text(
                 "Date",
-                style:TextStyle(
+                style:GoogleFonts.quicksand(
                   fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color:Color.fromRGBO(2,167,177,1),
+                  fontWeight: FontWeight.w700,
+                  color:const Color.fromRGBO(2,167,177,1),
                 ),
                 textAlign: TextAlign.left,
               ),
             ),
              Container(
-              //height: 50,
+              height: 50,
               width: MediaQuery.of(context).size.width,
                margin: EdgeInsets.only(
                 left: 15,
@@ -180,38 +225,66 @@ class _ToDoAppState extends State{
                 bottom: MediaQuery.of(context).viewInsets.bottom,
                ),
                child: TextField(
+                
                 controller:dateController,
-                style:const TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.w400,
+                style:GoogleFonts.quicksand(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
                   color: Colors.black,
                 ),
+                  
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+                  enabledBorder:const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10)
+                    ),
+                    borderSide: BorderSide(
+                      color: Colors.black, 
+                     width: 1.0,
+                    ),
+                   ),
+                   focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color.fromRGBO(2,167,177,1), // Border color when focused
+                        width: 1.0,
+                      ),
+                    ),
+                  suffixIcon: const Icon(
+                    Icons.calendar_month_outlined,
                   ),
-                  hintText: "Chose Date",
-                  hintStyle: TextStyle(
+                  hintText: "MM/DD/YYY",
+                  hintStyle: GoogleFonts.quicksand(
                     fontSize: 20,
-                    color: Colors.grey.shade400,
+                    color:Colors.grey.shade600,
                   ),
                 ),
+                onTap:()async{
+                DateTime? pickDate=await showDatePicker(
+                  
+                  context: context, 
+                 // initialDate: DateTime.now(),
+                  firstDate: DateTime(2024), 
+                  lastDate: DateTime(2025),
+                  );
+                  String formatedDate=DateFormat.yMMMd().format(pickDate!);
+                  dateController.text=formatedDate;
+                  setState(() {
+                    
+                  });
+               },
                 textAlign: TextAlign.left,
                ),
-            ),
+              ),
             const SizedBox(
               height: 10,
             ),
             GestureDetector(
               onTap:(){
-                title=titleController.text.trim();
-                description=descriptionController.text.trim();
-                date=dateController.text;
-                todoList.add({"Title":title,"Description":description,"Date":date});
-                titleController.clear();
-                descriptionController.clear();
-                dateController.clear();
-                setState((){});
+                Navigator.of(context).pop();
+                setState(() {
+                  submitData(isEdit,obj);
+                  clearController();
+                });
               },
               child: Container(
                 height: 60,
@@ -226,45 +299,48 @@ class _ToDoAppState extends State{
                   top: 15,
                   bottom: 15,
                 ),
+                
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color:const Color.fromRGBO(0,139,148,1),
                 ),
-                child: const Text(
+                child:Text(
                   "Submit",
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                    fontFamily: "Inter",
-                  ),
+                   style:GoogleFonts.inter(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                  color:Colors.white,
+                ),
                   textAlign: TextAlign.center,
                 ),
               ),
             ),
+           const SizedBox(
+            height: 20,
+           ),
           ],
         );
       }
       );
+      
   }
   @override
   Widget build(BuildContext context){
     return Scaffold(
         appBar:AppBar(
-          title:const Text(
+          title:Text(
             "To-do list",
-            style:TextStyle(
-              fontSize: 26,
-              fontWeight: FontWeight.w700,
-              fontFamily: "Quicksand",
-              color: Colors.white,
-            ),
+             style:GoogleFonts.quicksand(
+                  fontSize: 26,
+                  fontWeight: FontWeight.w700,
+                  color:Colors.white,
+                ),
           ),
           backgroundColor: const Color.fromRGBO(2,167,177,1),
           //backgroundColor: Colors.amber,
         ),
         body:ListView.builder(
-          itemCount: todoList.length,
+          itemCount: taskList.length,
           itemBuilder: (context,index){
             return Container(
               height: 135,
@@ -289,6 +365,7 @@ class _ToDoAppState extends State{
                             color: Colors.white
                             
                           ),
+                          clipBehavior: Clip.antiAlias,
                           child:SvgPicture.asset(
                             "assets/svg/Group42.svg",
                             height: 23,
@@ -305,13 +382,13 @@ class _ToDoAppState extends State{
                                 margin: const EdgeInsets.only(left: 10),
                                // padding: const EdgeInsets.only(left: 92),
                                 child:Text(
-                                  "${todoList[index]["Title"]}",
-                                  style:const TextStyle(
-                                    fontFamily: "Quicksand",
+                                  taskList[index].title,
+                                  style:GoogleFonts.quicksand(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w600,
                                     color:Colors.black,
                                   ),
+                                 
                                 ),
                               ),
                               const SizedBox(
@@ -324,9 +401,8 @@ class _ToDoAppState extends State{
                                 margin: const EdgeInsets.only(left: 10),
                                // padding: const EdgeInsets.only(left: 92),
                                 child:Text(
-                                  "${todoList[index]["Description"]}",
-                                  style:const TextStyle(
-                                    fontFamily: "Quicksand",
+                                  taskList[index].description,
+                                   style:GoogleFonts.quicksand(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w600,
                                     color:Colors.black,
@@ -346,28 +422,42 @@ class _ToDoAppState extends State{
                             width:150 ,
                             //color: Colors.green,
                             child:Text(
-                              "${todoList[index]["Date"]}",
-                              style:const TextStyle(
-                                fontFamily: "Quicksand",
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                                color:Colors.black,
-                              ),
+                              taskList[index].date,
+                              style:GoogleFonts.quicksand(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w500,
+                                    color:Colors.black,
+                                  ),
                             ),
                       ),
                       const Spacer(),
-                      const Icon(
-                        Icons.edit_outlined,
-                        size: 22,
-                        color: Color.fromRGBO(0, 139, 148, 1),
+                      GestureDetector(
+                        onTap: (){
+                          titleController.text=taskList[index].title;
+                          descriptionController.text=taskList[index].description;
+                          dateController.text=taskList[index].date;
+                          downSheet(true,taskList[index]);
+                          setState((){});
+                        },
+                        child: const Icon(
+                          Icons.edit_outlined,
+                          size: 22,
+                          color: Color.fromRGBO(0, 139, 148, 1),
+                        ),
                       ),
                       const SizedBox(
                         width: 10,
                       ),
-                      const Icon(
-                        Icons.delete_outlined,
-                        size: 22,
-                        color: Color.fromRGBO(0, 139, 148, 1),
+                      GestureDetector(
+                        onTap:(){
+                          taskList.removeAt(index);
+                          setState((){});
+                        },
+                        child: const Icon(
+                          Icons.delete_outlined,
+                          size: 22,
+                          color: Color.fromRGBO(0, 139, 148, 1),
+                        ),
                       ),
                     ],
                   ),
@@ -378,7 +468,7 @@ class _ToDoAppState extends State{
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: ()=>{
-            downSheet(),
+            downSheet(false),
             setState((){}),
           },
           backgroundColor: const Color.fromRGBO(0,139,148,1),
