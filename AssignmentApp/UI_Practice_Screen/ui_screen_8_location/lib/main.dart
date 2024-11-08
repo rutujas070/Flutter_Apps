@@ -1,8 +1,6 @@
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
 
 void main(){
   runApp( const MyApp());
@@ -51,10 +49,10 @@ class _Ui8State extends State{
               children: [
                 Container(
                   height: 41,
-                  width: 253,
+                  width: 270,
                   margin: const EdgeInsets.only(
                     left: 20,
-                    right: 20
+                    right:10
                   ),
                   padding: const EdgeInsets.only(
                     left: 50,
@@ -70,7 +68,7 @@ class _Ui8State extends State{
                       Text(
                         "Select Destinaton",
                         style:TextStyle(
-                          color: Colors.blue,
+                          color: const Color.fromRGBO(52, 111, 249,1),
                           fontSize: 15,
                           fontWeight: FontWeight.w500
                         ),
@@ -79,7 +77,7 @@ class _Ui8State extends State{
                       Icon(
                         Icons.arrow_drop_down,
                         size: 20,
-                        color: Colors.blue,
+                        color: const Color.fromRGBO(52, 111, 249,1),
                       ),
                     ],
                   ),
@@ -93,7 +91,7 @@ class _Ui8State extends State{
                   //color: Colors.amber,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
-                    color: const Color.fromRGBO(52,11,249,1),
+                    color:const Color.fromRGBO(52, 111, 249,1),
                   ),
                   child:const  Icon(
                     Icons.search,
@@ -161,9 +159,74 @@ class _Ui8State extends State{
               const Spacer(),
               ],
             ),
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: const Color.fromRGBO(233, 237, 248, 1),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child:const Stack(
+                    children: [
+                      Column(
+                        children: [
+                        Row(
+                          children: [
+                            Column(
+                              children: [
+                                const Text(
+                                  "EI Cario",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                const Text(
+                                  "Egypt",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.grey,
+                                  ),
+                                )
+                              ],
+                            ),
+                            //Spacer(),
+                            
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.star,
+                                  color: Color.fromARGB(255, 248, 178, 29),
+                                  size: 20,
+                                ),
+                                Text(
+                                  "4.6",
+                                  style:TextStyle(
+                                    color: Color.fromARGB(255, 248, 178, 29),
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        ],
+                      ),
+                    ],
+                  )
+                ),
+              ],
+            ),
           ],
         ),
       );
     
   }
 }
+
+
+
