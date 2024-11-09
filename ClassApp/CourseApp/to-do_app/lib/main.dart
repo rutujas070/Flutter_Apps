@@ -176,7 +176,7 @@ class _ToDoAppState extends State{
                 decoration: InputDecoration(
                   enabledBorder:const OutlineInputBorder(
                     borderRadius: BorderRadius.all(
-                      Radius.circular(10)
+                      Radius.circular(10) 
                     ),
                     borderSide: BorderSide(
                       color: Colors.black, 
