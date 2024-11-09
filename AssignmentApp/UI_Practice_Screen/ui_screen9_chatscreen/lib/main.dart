@@ -167,3 +167,330 @@ class _MessageScreenState extends State {
     );
   }
 }
+
+
+
+
+
+
+Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 204, 226, 244),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(
+                height: 50,
+              ),
+              ShaderMask(
+                shaderCallback: (bounds) => const LinearGradient(
+                  colors: [Colors.pink, Colors.purple],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ).createShader(bounds),
+                child: const Text(
+                  'Flo for Partners',
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white, // color is required for the gradient
+                  ),
+                ),
+              ),
+               const SizedBox(height: 20),
+              const Text(
+                'Share the journey to pregnancy',
+                style: TextStyle(fontSize: 25),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                'Let your partner see your cycle insights',
+                style: TextStyle(fontSize: 16),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 20),
+              Container(
+                margin: const EdgeInsets.only(
+                  left: 10
+                ),
+                alignment: Alignment.centerLeft,
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.check_box
+                    ),
+                    Expanded(
+                      child: const Text(
+                                      'You\'ll both get guidance on the best time to try.',
+                                      style: TextStyle(fontSize: 16),
+                                      textAlign: TextAlign.center,
+                                    ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20),
+              Container(
+                alignment: Alignment.centerLeft,
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.check_box
+                    ),
+                    Expanded(
+                      child: const Text(
+                                      'We\'ll help keep conception sex fun and show him how to plan ahead.',
+                                      style: TextStyle(fontSize: 16),
+                                      textAlign: TextAlign.center,
+                                    ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20),
+              Container(
+                alignment: Alignment.centerLeft,
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.check_box
+                    ),
+                    Expanded(
+                      child: const Text(
+                                      'He\'ll get the lowdown on fertility and ways he can help.',
+                                      style: TextStyle(fontSize: 16),
+                                      textAlign: TextAlign.center,
+                                    ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 30),
+              const Text(
+                'What your partner sees',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 20),
+              Container(
+                height: 500,
+                width: 250,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: Colors.blue.shade200,
+                    width: 10,
+                  )
+                ),
+                child: Image.asset("assets/images/icon66.png",
+                fit:BoxFit.cover,
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const Text(
+                "My partner now understands my fertile days without me telling him, which is really important for us as we're trying to conceive.",
+                style: TextStyle(fontSize: 30,
+                color: Color.fromARGB(255, 74, 181, 199)),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const Text(
+                "Katerina, 33 \nFlo for Partners member\nKaterina took part in Flo for Partners beta testing and was paid for her time.",
+                style: TextStyle(fontSize: 16,
+                color: Colors.grey),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Container(
+                margin: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white
+                ),
+                child: Column(
+                  children: [ 
+                    Text(
+                      "Your questions answered",
+
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      child: Row(children: [
+                        Text(
+                          "What is Flo for Partners?",
+                        ),
+                        const Spacer(),
+                        Icon(
+                          Icons.arrow_drop_down,
+                        ),
+                      ],),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Divider(
+                height: 2,
+                color: Colors.grey[300],
+                indent: 10,
+                endIndent: 10,
+              ),
+               const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      child: Row(children: [
+                        Text(
+                          "How do I set up Flo for Partners?",
+                        ),
+                        const Spacer(),
+                        Icon(
+                          Icons.arrow_drop_down,
+                        ),
+                      ],),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Divider(
+                height: 2,
+                color: Colors.grey[300],
+                indent: 10,
+                endIndent: 10,
+              ),
+               const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      child: Row(children: [
+                        Text(
+                          "What data will be shared with my partner?",
+                        ),
+                        const Spacer(),
+                        Icon(
+                          Icons.arrow_drop_down,
+                        ),
+                      ],),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Divider(
+                height: 2,
+                color: Colors.grey[300],
+                indent: 10,
+                endIndent: 10,
+              ),
+               const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      child: Row(children: [
+                        Text(
+                          "Can my partner edit my data, or see my\nsymptoms and personal notes?",
+                        ),
+                        Spacer(),
+                        Icon(
+                          Icons.arrow_drop_down,
+                        ),
+                      ],),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Divider(
+                height: 2,
+                color: Colors.grey[300],
+                indent: 10,
+                endIndent: 10,
+              ),
+               const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      child: Row(children: [
+                        Text(
+                          "What will my partner see in my calendar?",
+                        ),
+                        const Spacer(),
+                        Icon(
+                          Icons.arrow_drop_down,
+                        ),
+                      ],),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Divider(
+                height: 2,
+                color: Colors.grey[300],
+                indent: 10,
+                endIndent: 10,
+              ),
+               const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      child: Row(children: [
+                        Text(
+                          "Can I stop sharing at any time?",
+                        ),
+                        const Spacer(),
+                        Icon(
+                          Icons.arrow_drop_down,
+                        ),
+                      ],),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Divider(
+                height: 2,
+                color: Colors.grey[300],
+                indent: 10,
+                endIndent: 10,
+              ),
+               const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      child: Row(children: [
+                        Text(
+                          "Can all couples use Flo for Partners?",
+                        ),
+                        const Spacer(),
+                        Icon(
+                          Icons.arrow_drop_down,
+                        ),
+                      ],),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Divider(
+                height: 2,
+                color: Colors.grey[300],
+                indent: 10,
+                endIndent: 10,
+              ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
