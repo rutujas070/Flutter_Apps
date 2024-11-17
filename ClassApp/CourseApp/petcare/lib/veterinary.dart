@@ -2,26 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:petcare/homePage.dart';
+import 'package:petcare/services.dart';
 
-void main() {
-  runApp(const Veterinarypage());
-}
 
-class Veterinarypage extends StatelessWidget {
+class Veterinarypage extends StatefulWidget {
   const Veterinarypage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Veterinary(),
-    );
-  }
-}
-
-class Veterinary extends StatefulWidget {
-  const Veterinary({super.key});
   @override
   State createState() => _VeterinaryState();
 }
@@ -43,7 +28,7 @@ class _VeterinaryState extends State {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) {
-                        return const Homepage();
+                        return const Servicespage();
                       },
                     ),
                   );

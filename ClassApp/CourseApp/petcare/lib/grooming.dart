@@ -3,24 +3,10 @@ import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:petcare/homePage.dart';
 
-void main() {
-  runApp(const Groomingpage());
-}
 
-class Groomingpage extends StatelessWidget {
+
+class Groomingpage extends StatefulWidget {
   const Groomingpage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Grooming(),
-    );
-  }
-}
-
-class Grooming extends StatefulWidget {
-  const Grooming({super.key});
   @override
   State createState() => _GroomingState();
 }

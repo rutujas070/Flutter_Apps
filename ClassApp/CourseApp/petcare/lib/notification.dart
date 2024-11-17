@@ -3,26 +3,13 @@ import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:petcare/homePage.dart';
 
-void main() {
-  runApp(const Notificationpage());
-}
 
-class Notificationpage extends StatelessWidget {
-  const Notificationpage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Notification(),
-    );
-  }
-}
-class Notification extends StatefulWidget{
-  const Notification({super.key});
+class NotificationPage extends StatefulWidget{
+  const NotificationPage({super.key});
   @override
   State createState()=>_NotificationState();
 }
+
 class _NotificationState extends State{
   @override
   Widget build(BuildContext context){

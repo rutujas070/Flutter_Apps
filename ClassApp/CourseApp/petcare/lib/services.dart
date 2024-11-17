@@ -1,25 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'homePage.dart';
+import 'package:petcare/homePage.dart';
+import 'package:petcare/shop.dart';
+import 'package:petcare/veterinary.dart';
 
-void main() {
-  runApp(const Servicespage());
-}
 
-class Servicespage extends StatelessWidget {
+class Servicespage extends StatefulWidget {
   const Servicespage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Services(),
-    );
-  }
-}
-
-class Services extends StatefulWidget {
-  const Services({super.key});
   @override
   State createState() => _ServicesState();
 }
@@ -275,7 +263,17 @@ class _ServicesState extends State {
                     ]),
                 child: Row(
                   children: [
-                    Image.asset("assets/images/image (13).png"),
+                    GestureDetector(
+                      onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const Veterinarypage();
+                          },
+                        ),
+                      );
+                    },
+                    child: Image.asset("assets/images/image (13).png")),
                     const SizedBox(
                       width: 10,
                     ),
@@ -524,13 +522,35 @@ class _ServicesState extends State {
       // onTap: _onItemTapped, // Ensure this function is implemented to update _selectedIndex
       // currentIndex: _selectedIndex,
       // onTap: _onItemTapped,
-      items: const [
+      items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
+          icon: GestureDetector(
+             onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const Homepage();
+                          },
+                        ),
+                      );
+                    },
+            child: Icon(Icons.home)
+          ),
           label: 'Home',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.favorite_border),
+          icon: GestureDetector(
+             onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const Servicespage();
+                          },
+                        ),
+                      );
+                    },
+            child: Icon(Icons.favorite_border),
+          ),
           label: 'Service',
         ),
         BottomNavigationBarItem(
@@ -555,6 +575,15 @@ class _ServicesState extends State {
       child: GestureDetector(
         // onTap: () => _onItemTapped(2), // Set the desired index when tapped
         // onTap: () => _onItemTapped(2),
+         onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const ShopPage();
+                          },
+                        ),
+                      );
+                    },
         child: Container(
           height: 70,
           width: 70,

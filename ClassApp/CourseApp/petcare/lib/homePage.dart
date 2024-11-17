@@ -1,27 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:petcare/grooming.dart';
 import 'package:petcare/notification.dart';
-import 'package:petcare/veterinary.dart';
+import 'package:petcare/services.dart';
+import 'package:petcare/shop.dart';
+import 'package:petcare/training.dart';
 
-void main() {
-  runApp(const Homepage());
-}
 
-class Homepage extends StatelessWidget {
+class Homepage extends StatefulWidget {
   const Homepage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Home(),
-    );
-  }
-}
-
-class Home extends StatefulWidget {
-  const Home({super.key});
   @override
   State createState() => _HomeState();
 }
@@ -74,7 +62,7 @@ class _HomeState extends State {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) {
-                            return const Notificationpage();
+                            return const NotificationPage();
                           },
                         ),
                       );
@@ -210,7 +198,7 @@ class _HomeState extends State {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) {
-                                return const Veterinarypage();
+                                return const Servicespage();
                               },
                             ),
                           );
@@ -240,7 +228,7 @@ class _HomeState extends State {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) {
-                                return const Grooming();
+                                return const Groomingpage();
                               },
                             ),
                           );
@@ -284,8 +272,19 @@ class _HomeState extends State {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Image.asset(
-                        "assets/images/image (5).png",
+                      GestureDetector(
+                         onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return const Trainingpage();
+                              },
+                            ),
+                          );
+                        },
+                        child: Image.asset(
+                          "assets/images/image (5).png",
+                        ),
                       ),
                       const SizedBox(
                         height: 5,
@@ -477,21 +476,45 @@ class _HomeState extends State {
             type: BottomNavigationBarType.fixed,
             // currentIndex: _selectedIndex,
             // onTap: _onItemTapped,
-            items: const [
+            items: [
               BottomNavigationBarItem(
-                icon: Icon(Icons.home),
+                icon: GestureDetector(
+                  onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const Homepage();
+                          },
+                        ),
+                      );
+                    },
+                  child: Icon(Icons.home)
+                ),
                 label: 'Home',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.favorite_border),
+                icon: GestureDetector(
+                  onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const Servicespage();
+                          },
+                        ),
+                      );
+                    },
+                  child: Icon(Icons.favorite_border)
+                ),
                 label: 'Service',
               ),
-              BottomNavigationBarItem(
+              const BottomNavigationBarItem(
                 icon: SizedBox.shrink(), // Placeholder for center icon
                 label: '',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.history),
+                icon: GestureDetector(
+                  child: Icon(Icons.history),
+                  ),
                 label: 'History',
               ),
               BottomNavigationBarItem(
@@ -506,7 +529,15 @@ class _HomeState extends State {
             bottom: 20, // Adjust this value to control overlap
             left: MediaQuery.of(context).size.width / 2 - 30, // Center the icon
             child: GestureDetector(
-              // onTap: () => _onItemTapped(2),
+             onTap: () {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const ShopPage();
+                          },
+                        ),
+                      );
+                    },
               child: Container(
                 height: 70,
                 width: 70,

@@ -2,21 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:petcare/homePage.dart';
 
-void main() {
-  runApp(const Loginpage());
-}
-
-class Loginpage extends StatelessWidget {
-  const Loginpage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Login(),
-    );
-  }
-}
 class Login extends StatefulWidget{
   const Login({super.key});
   @override
@@ -167,20 +152,31 @@ class _LoginState extends State{
                   ),
                 );
               },
-              child: Container(
-                height: 40,
-                width: 340,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: const Color.fromRGBO(245, 146, 69, 1),
-                ),
-                alignment: Alignment.center,
-                child: Text(
-                  "LOGIN",
-                  style:GoogleFonts.poppins(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 15,
-                    color: Colors.white
+              child: GestureDetector(
+                onTap: () {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const Homepage();
+                          },
+                        ),
+                      );
+                    },
+                child: Container(
+                  height: 40,
+                  width: 340,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: const Color.fromRGBO(245, 146, 69, 1),
+                  ),
+                  alignment: Alignment.center,
+                  child: Text(
+                    "LOGIN",
+                    style:GoogleFonts.poppins(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 15,
+                      color: Colors.white
+                    ),
                   ),
                 ),
               ),
