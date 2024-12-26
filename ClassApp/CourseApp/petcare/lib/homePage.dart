@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:petcare/grooming.dart';
+import 'package:petcare/logout.dart';
 import 'package:petcare/notification.dart';
 import 'package:petcare/services.dart';
 import 'package:petcare/shop.dart';
@@ -30,8 +31,14 @@ class _HomeState extends State {
             children: [
               Row(
                 children: [
-                  Image.asset(
-                    "assets/images/image.png",
+                  GestureDetector(
+                     onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const Mysetting ()));
+          },
+                    child: Image.asset(
+                      "assets/images/image.png",
+                    ),
                   ),
                   const SizedBox(
                     width: 10,
@@ -253,8 +260,19 @@ class _HomeState extends State {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Image.asset(
-                        "assets/images/image (4).png",
+                      GestureDetector(
+                         onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return const ShopPage();
+                              },
+                            ),
+                          );
+                        },
+                        child: Image.asset(
+                          "assets/images/image (4).png",
+                        ),
                       ),
                       const SizedBox(
                         height: 5,

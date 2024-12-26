@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:petcare/SessionData.dart';
+import 'package:petcare/homePage.dart';
 import 'package:petcare/loginPage.dart';
 
 class Splashscreen extends StatefulWidget {
@@ -12,17 +16,44 @@ class _SplashscreenState extends State {
   @override
   void initState() {
     super.initState();
-    _navigatetoLogin();
+    // _navigatetoLogin();
   }
 
-  _navigatetoLogin() async {
-    await Future.delayed(Duration(milliseconds: 5000), () {});
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => const Login()));
-  }
+  // _navigatetoLogin() async {
+  //   await Future.delayed(Duration(milliseconds: 5000), () {});
+  //   Navigator.pushReplacement(
+  //       context, MaterialPageRoute(builder: (context) => const Login()));
+  // }
+    void navigate(BuildContext context) {
+    
+    Future.delayed(const Duration(seconds: 4), () async {
+      await SessionData.getSessionData();
+      log("IS LOGIN ${SessionData.isLogin}");   
 
+      if (SessionData.isLogin!) {
+        print("NAVIGATE TO HOME");
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) {
+              return const Homepage();
+            },
+          ),
+        );
+      } else {
+        print("NAVIGATE TO signup");
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) {
+              return const Login();
+            },
+          ),
+        );
+      }
+    });
+  }
   @override
   Widget build(BuildContext context) {
+    navigate(context);
     return Scaffold(
       backgroundColor: const Color.fromRGBO(245, 146, 69, 1),
       body: Center(
