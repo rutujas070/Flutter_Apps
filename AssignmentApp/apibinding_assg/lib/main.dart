@@ -1,5 +1,4 @@
 
-//import 'package:api_binding/fun.dart';
 import 'package:apibinding_assg/firstpage.dart';
 import 'package:flutter/material.dart';
 

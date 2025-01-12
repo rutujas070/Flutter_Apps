@@ -38,7 +38,8 @@ class GetWholeData extends StatelessWidget {
         backgroundColor: Colors.blueGrey,
       ),
       body: Container(
-             // height: 500,
+              //height: 500,
+              height: 500,
               margin: const EdgeInsets.only(
                 left: 20,
                 right: 20,

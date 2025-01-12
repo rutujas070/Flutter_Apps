@@ -20,7 +20,7 @@ class _LoginState extends State {
       TextEditingController();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   bool _isPasswordVisible = false;
-  final FirebaseAuth auth = FirebaseAuth.instance;
+  // final FirebaseAuth auth = FirebaseAuth.instance;
 
 
   @override

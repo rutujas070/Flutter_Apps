@@ -28,240 +28,243 @@ class _UpdateDataState extends State {
           centerTitle: true,
           backgroundColor: Colors.blueGrey,
         ),
-        body: Column(
-          children: [
-             const SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: TextField(
-                controller: idControler,
-                style: const TextStyle(
-                  fontSize: 30,
-                ),
-                decoration: const InputDecoration(
-                  hintText: "Enter Product ID",
-                  hintStyle: TextStyle(
-                    fontSize: 25,
-                    color: Colors.blueGrey,
-                  ),
-                 focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.blueGrey,
-                      width: 2,
-                    )
-                  ),
-                  enabledBorder:OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.blueGrey,
-                      width: 2,
-                    )
-                  ),
-                ),
+        body: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: [
+               const SizedBox(
+                height: 20,
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: TextField(
-                controller: nameControler,
-                style: const TextStyle(
-                  fontSize: 30,
-                ),
-                decoration: const InputDecoration(
-                  hintText: "Enter Product Name",
-                  hintStyle: TextStyle(
-                    fontSize: 25,
-                    color: Colors.blueGrey,
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: TextField(
+                  controller: idControler,
+                  style: const TextStyle(
+                    fontSize: 30,
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
+                  decoration: const InputDecoration(
+                    hintText: "Enter Product ID",
+                    hintStyle: TextStyle(
+                      fontSize: 25,
                       color: Colors.blueGrey,
-                      width: 2,
-                    )
-                  ),
-                  enabledBorder:OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.blueGrey,
-                      width: 2,
-                    )
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: TextField(
-                controller: priceControler,
-                style: const TextStyle(
-                  fontSize: 30,
-                ),
-                decoration: const InputDecoration(
-                  hintText: "Enter Product Price",
-                  hintStyle: TextStyle(
-                    fontSize: 25,
-                    color: Colors.blueGrey,
-                  ),
-                 focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.blueGrey,
-                      width: 2,
-                    )
-                  ),
-                  enabledBorder:OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.blueGrey,
-                      width: 2,
-                    )
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: TextField(
-                controller: colorControler,
-                style: const TextStyle(
-                  fontSize: 30,
-                ),
-                decoration: const InputDecoration(
-                  hintText: "Enter Product Color",
-                  hintStyle: TextStyle(
-                    fontSize: 25,
-                    color: Colors.blueGrey,
-                  ),
-                 focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.blueGrey,
-                      width: 2,
-                    )
-                  ),
-                  enabledBorder:OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.blueGrey,
-                      width: 2,
-                    )
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            GestureDetector(
-              onTap: () async {
-                Uri url = Uri.parse("https://api.restful-api.dev/objects/${idControler.text}");
-                Map deviceData1 = {
-                  "name": nameControler.text,
-                  "data": {
-                    "color": colorControler.text,
-                    "price": priceControler.text,
-                  }
-                };
-                http.Response response = await http
-                    .put(url, body: json.encode(deviceData1), headers: {
-                  "content-type": "application/json",
-                });
-                log("${response.statusCode}");
-
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return FirstPage();
-                }));
-                if(response.statusCode==200){
-                ScaffoldMessenger.of(context).showSnackBar(
-                   SnackBar(
-                    content: Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          color: Colors.blueGrey,
-                          width: 3
-                        ),
-                        color: const Color.fromARGB(255, 168, 192, 205),
-                      ),
-                      child: Text(
-                        "Data Update Successfully\n Status: ${response.statusCode}",
-                        style:GoogleFonts.poppins(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 20,
-                          color: Colors.black
-                        ),
-                      ),
+                    ),
+                   focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.blueGrey,
+                        width: 2,
+                      )
+                    ),
+                    enabledBorder:OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.blueGrey,
+                        width: 2,
+                      )
                     ),
                   ),
-                );
-                }else{
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: TextField(
+                  controller: nameControler,
+                  style: const TextStyle(
+                    fontSize: 30,
+                  ),
+                  decoration: const InputDecoration(
+                    hintText: "Enter Product Name",
+                    hintStyle: TextStyle(
+                      fontSize: 25,
+                      color: Colors.blueGrey,
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.blueGrey,
+                        width: 2,
+                      )
+                    ),
+                    enabledBorder:OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.blueGrey,
+                        width: 2,
+                      )
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: TextField(
+                  controller: priceControler,
+                  style: const TextStyle(
+                    fontSize: 30,
+                  ),
+                  decoration: const InputDecoration(
+                    hintText: "Enter Product Price",
+                    hintStyle: TextStyle(
+                      fontSize: 25,
+                      color: Colors.blueGrey,
+                    ),
+                   focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.blueGrey,
+                        width: 2,
+                      )
+                    ),
+                    enabledBorder:OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.blueGrey,
+                        width: 2,
+                      )
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: TextField(
+                  controller: colorControler,
+                  style: const TextStyle(
+                    fontSize: 30,
+                  ),
+                  decoration: const InputDecoration(
+                    hintText: "Enter Product Color",
+                    hintStyle: TextStyle(
+                      fontSize: 25,
+                      color: Colors.blueGrey,
+                    ),
+                   focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.blueGrey,
+                        width: 2,
+                      )
+                    ),
+                    enabledBorder:OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.blueGrey,
+                        width: 2,
+                      )
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              GestureDetector(
+                onTap: () async {
+                  Uri url = Uri.parse("https://api.restful-api.dev/objects/${idControler.text}");
+                  Map deviceData1 = {
+                    "name": nameControler.text,
+                    "data": {
+                      "color": colorControler.text,
+                      "price": priceControler.text,
+                    }
+                  };
+                  http.Response response = await http
+                      .put(url, body: json.encode(deviceData1), headers: {
+                    "content-type": "application/json",
+                  });
+                  log("${response.statusCode}");
+          
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return FirstPage();
+                  }));
+                  if(response.statusCode==200){
                   ScaffoldMessenger.of(context).showSnackBar(
-                   SnackBar(
-                    content: Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          color: Colors.blueGrey,
-                          width: 3
+                     SnackBar(
+                      content: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: Colors.blueGrey,
+                            width: 3
+                          ),
+                          color: const Color.fromARGB(255, 168, 192, 205),
                         ),
-                        color: const Color.fromARGB(255, 168, 192, 205),
-                      ),
-                      child: Text(
-                        "Data Update Faill\n Status: ${response.statusCode}",
-                        style:GoogleFonts.poppins(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 20,
-                          color: Colors.black
+                        child: Text(
+                          "Data Update Successfully\n Status: ${response.statusCode}",
+                          style:GoogleFonts.poppins(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 20,
+                            color: Colors.black
+                          ),
                         ),
                       ),
                     ),
+                  );
+                  }else{
+                    ScaffoldMessenger.of(context).showSnackBar(
+                     SnackBar(
+                      content: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: Colors.blueGrey,
+                            width: 3
+                          ),
+                          color: const Color.fromARGB(255, 168, 192, 205),
+                        ),
+                        child: Text(
+                          "Data Update Faill\n Status: ${response.statusCode}",
+                          style:GoogleFonts.poppins(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 20,
+                            color: Colors.black
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                  }
+                  setState(() {
+                    nameControler.clear();
+                    priceControler.clear();
+                    colorControler.clear();
+                    idControler.clear();
+                  });
+                  //   else {
+                  //     ScaffoldMessenger.of(context).showSnackBar(
+                  //       const SnackBar(
+                  //         content: Text("Please add data"),
+                  //       ),
+                  //     );
+                  //   }
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 15,
+                    vertical: 5,
                   ),
-                );
-                }
-                setState(() {
-                  nameControler.clear();
-                  priceControler.clear();
-                  colorControler.clear();
-                  idControler.clear();
-                });
-                //   else {
-                //     ScaffoldMessenger.of(context).showSnackBar(
-                //       const SnackBar(
-                //         content: Text("Please add data"),
-                //       ),
-                //     );
-                //   }
-              },
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 15,
-                  vertical: 5,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: Colors.blueGrey,
-                ),
-                child: const Text(
-                  "Submit",
-                  style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.white,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.blueGrey,
+                  ),
+                  child: const Text(
+                    "Submit",
+                    style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(height: 20),
-            const SizedBox(
-              height: 40,
-            ),
-          ],
+              const SizedBox(height: 20),
+              const SizedBox(
+                height: 40,
+              ),
+            ],
+          ),
         ),
       ),
     );
