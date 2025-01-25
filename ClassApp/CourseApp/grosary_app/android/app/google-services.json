@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "761333931867",
+    "project_id": "grosaryapp-91775",
+    "storage_bucket": "grosaryapp-91775.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:761333931867:android:58692cc1d2001f8816447e",
+        "android_client_info": {
+          "package_name": "com.example.grosary_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_IlDdys9E3GsHur0vzutoZ8NqpXT3BLo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

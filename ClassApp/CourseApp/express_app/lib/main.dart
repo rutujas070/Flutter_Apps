@@ -10,8 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      //home: ExpenseFirst(),
-      home:Page2(),
+      home: Page2(),        //GraphScreen
     );
   }
 }

@@ -3,7 +3,7 @@ import 'package:express_app/four.dart';
 import 'package:express_app/graph.dart';
 import 'package:express_app/tras.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -460,13 +460,13 @@ class _ChatPage extends State {
                   ),
                   GestureDetector(
                     onTap:(){
-                       Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context){
-                            return const Page2();
-                          },
-                        ),
-                      );
+                      //  Navigator.of(context).push(
+                      //   MaterialPageRoute(
+                      //     builder: (context){
+                      //       return const Page2();
+                      //     },
+                      //   ),
+                      // );
                     },
                     child: Text(
                        "Graphs",

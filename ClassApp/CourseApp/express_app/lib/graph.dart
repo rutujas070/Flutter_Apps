@@ -1,8 +1,7 @@
-
-import 'package:fl_chart/fl_chart.dart';
+// import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'dart:ui';
+import 'package:pie_chart/pie_chart.dart';
 
 class Page2 extends StatefulWidget {
   const Page2({super.key});
@@ -12,6 +11,13 @@ class Page2 extends StatefulWidget {
 }
 
 class _Page2State extends State<Page2> {
+List<Color> localColorList= const [
+   Color.fromARGB(255, 186, 58, 49),
+    Colors.blue,
+    Colors.green,
+    Colors.purple,
+    Color.fromARGB(255, 213, 90, 131)
+  ];
   List data = [
     {
       "Img": "assets/image/food.png",
@@ -39,6 +45,16 @@ class _Page2State extends State<Page2> {
       "Price": "324",
     }
   ];
+  Map<String, double> dataMap = {
+    "Shopping": 324,
+    "Entertainment": 475,
+    "Medicine": 500,
+    "Fuel": 600,
+    "Food":650
+  };
+  // final colorList = <Color>[
+  //   Colors.greenAccent,
+  // ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,208 +83,31 @@ class _Page2State extends State<Page2> {
         child: Column(
           children: [
             const SizedBox(height: 20),
-            Center(
-              child: Row(
-                children: [
-                  Stack(alignment: Alignment.center, children: [
-                    SizedBox(
-                      width: 240,
-                      height: 230,
-                      child: PieChart(
-                        PieChartData(
-                          sections: [
-                            PieChartSectionData(
-                              value: 40,
-                              color: const Color.fromARGB(255, 187, 50, 41),
-                              radius: 40,
-                              title: "",
-                            ),
-                            PieChartSectionData(
-                              value: 30,
-                              color: Colors.blue,
-                              radius: 40,
-                              title: "",
-                            ),
-                            PieChartSectionData(
-                              value: 20,
-                              color: Colors.green,
-                              radius: 40,
-                              title: "",
-                            ),
-                            PieChartSectionData(
-                              value: 10,
-                              color: Colors.purple,
-                              radius: 40,
-                              title: "",
-                            ),
-                            PieChartSectionData(
-                              value: 10,
-                              color: const Color.fromARGB(255, 213, 90, 131),
-                              radius: 40,
-                              title: "",
-                            ),
-                          ],
-                          centerSpaceRadius: 70,
-                          sectionsSpace: 0,
-                        ),
-                      ),
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Total",
-                          style: GoogleFonts.poppins(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
-                        Text(
-                          "100%",
-                          style: GoogleFonts.poppins(
-                            fontSize: 22,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
-                    )
-                  ]),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 1),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 8),
-                          child: Row(
-                            children: [
-                              Container(
-                                height: 25,
-                                width: 25,
-                                decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Color.fromARGB(255, 186, 58, 49)),
-                              ),
-                              const SizedBox(
-                                width: 9,
-                              ),
-                              Text(
-                                "Food",
-                                style: GoogleFonts.poppins(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black),
-                              )
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 8),
-                          child: Row(
-                            children: [
-                              Container(
-                                height: 25,
-                                width: 25,
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.blue,
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 9,
-                              ),
-                              Text(
-                                "Fuel",
-                                style: GoogleFonts.poppins(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black),
-                              )
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 8),
-                          child: Row(
-                            children: [
-                              Container(
-                                height: 25,
-                                width: 25,
-                                decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.green),
-                              ),
-                              const SizedBox(
-                                width: 7,
-                              ),
-                              Text(
-                                "Medicine",
-                                style: GoogleFonts.poppins(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black),
-                              )
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 8),
-                          child: Row(
-                            children: [
-                              Container(
-                                height: 25,
-                                width: 25,
-                                decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.purple),
-                              ),
-                              const SizedBox(
-                                width: 2,
-                              ),
-                              Text(
-                                "Entertainment",
-                                style: GoogleFonts.poppins(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black),
-                              )
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 8),
-                          child: Row(
-                            children: [
-                              Container(
-                                height: 25,
-                                width: 25,
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Color.fromARGB(255, 213, 90, 131),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 7,
-                              ),
-                              Text(
-                                "Shopping",
-                                style: GoogleFonts.poppins(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black),
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: PieChart(
+                dataMap: dataMap,
+                centerWidget: Text("Total\n\$ 2250.00",
+                style:TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700
+                )),
+                colorList: localColorList,
+                legendOptions: LegendOptions(
+                  legendTextStyle: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w500,
+                    
                   )
-                ],
+                ),
+                ringStrokeWidth: 30,
+                chartType: ChartType.ring,
+                chartValuesOptions: const ChartValuesOptions(
+                  showChartValues: false
+                ),
               ),
             ),
+            
             const SizedBox(height: 20),
             Column(
               children: [
@@ -286,9 +125,7 @@ class _Page2State extends State<Page2> {
                                 padding: const EdgeInsets.only(
                                     left: 17, top: 15, bottom: 10),
                                 child: GestureDetector(
-                                  onTap: () {
-                                   
-                                  },
+                                  onTap: () {},
                                   child: SizedBox(
                                       height: 55,
                                       width: 55,
@@ -316,7 +153,8 @@ class _Page2State extends State<Page2> {
                               const SizedBox(
                                 width: 10,
                               ),
-                              const Icon(Icons.arrow_forward_ios_sharp, size: 20),
+                              const Icon(Icons.arrow_forward_ios_sharp,
+                                  size: 20),
                             ],
                           )
                         ],
@@ -350,7 +188,7 @@ class _Page2State extends State<Page2> {
             )
           ],
         ),
-     ),
-);
-}
+      ),
+    );
+  }
 }

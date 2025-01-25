@@ -134,13 +134,13 @@ class _TrashPageState extends State<TrashPage> {
                   ),
                   GestureDetector(
                     onTap:(){
-                       Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context){
-                            return const Page2();
-                          },
-                        ),
-                      );
+                      //  Navigator.of(context).push(
+                      //   MaterialPageRoute(
+                      //     builder: (context){
+                      //       return const Page2();
+                      //     },
+                      //   ),
+                      // );
                     },
                     child: Text(
                        "Graphs",

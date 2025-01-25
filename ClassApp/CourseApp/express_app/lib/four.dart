@@ -290,13 +290,13 @@ final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
                   ),
                   GestureDetector(
                     onTap:(){
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context){
-                            return const Page2();
-                          },
-                        ),
-                      );
+                      // Navigator.of(context).push(
+                      //   MaterialPageRoute(
+                      //     builder: (context){
+                      //       return const Page2();
+                      //     },
+                      //   ),
+                      // );
                     },
                     child: Text(
                        "Graphs",
