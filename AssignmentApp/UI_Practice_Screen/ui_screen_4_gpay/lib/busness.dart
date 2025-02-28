@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
+
 void main(){
-  void fun(){
+  void fun(bool visiblity){
      Visibility(
                         visible: !visiblity,
                       child: Column(
@@ -498,6 +500,6 @@ void main(){
                   ),
                   ],
                   ),
-                  ),
+                  );
   }
 }
