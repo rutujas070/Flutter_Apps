@@ -1,17 +1,112 @@
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
-import 'modelclass.dart';
-import 'backend.dart';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
+// Todo Model Class
+class TodoClass {
+  final int? id;
+  final String title;
+  final String description;
+  final String date;
 
+  TodoClass({this.id, required this.title, required this.description, required this.date});
+
+  // Convert a Todo object to a Map object
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'title': title,
+      'description': description,
+      'date': date,
+    };
+  }
+
+  // Create a Todo object from a Map object
+  factory TodoClass.fromMap(Map<String, dynamic> map) {
+    return TodoClass(
+      id: map['id'],
+      title: map['title'],
+      description: map['description'],
+      date: map['date'],
+    );
+  }
+}
+
+// Database Helper Class
+class DatabaseHelper {
+  static final DatabaseHelper _instance = DatabaseHelper._internal();
+  factory DatabaseHelper() => _instance;
+
+  static Database? _database;
+
+  DatabaseHelper._internal();
+
+  Future<Database> get database async {
+    if (_database != null) return _database!;
+    _database = await _initDatabase();
+    return _database!;
+  }
+
+  Future<Database> _initDatabase() async {
+    final databasePath = await getDatabasesPath();
+    final path = join(databasePath, 'todo.db');
+
+    return openDatabase(
+      path,
+      version: 1,
+      onCreate: (db, version) {
+        db.execute('''
+          CREATE TABLE todos (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            title TEXT NOT NULL,
+            description TEXT NOT NULL,
+            date TEXT NOT NULL
+          )
+        ''');
+      },
+    );
+  }
+
+  // Insert a new todo
+  Future<int> insertTodo(TodoClass todo) async {
+    final db = await database;
+    return await db.insert('todos', todo.toMap());
+  }
+
+  // Retrieve all todos
+  Future<List<TodoClass>> fetchTodos() async {
+    final db = await database;
+    final List<Map<String, dynamic>> maps = await db.query('todos');
+    return maps.map((map) => TodoClass.fromMap(map)).toList();
+  }
+
+  // Update a todo
+  Future<int> updateTodo(TodoClass todo) async {
+    final db = await database;
+    return await db.update(
+      'todos',
+      todo.toMap(),
+      where: 'id = ?',
+      whereArgs: [todo.id],
+    );
+  }
+
+  // Delete a todo
+  Future<int> deleteTodo(int id) async {
+    final db = await database;
+    return await db.delete(
+      'todos',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+}
 
 void main() {
-
   runApp(const MainApp());
 }
 
@@ -26,55 +121,78 @@ class MainApp extends StatelessWidget {
     );
   }
 }
-class TodoApp extends StatefulWidget{
+
+class TodoApp extends StatefulWidget {
   const TodoApp({super.key});
+
   @override
-  State createState()=>_TodoAppState();
+  State<TodoApp> createState() => _TodoAppState();
 }
-class _TodoAppState extends State{
-  
-  TextEditingController titleController=TextEditingController();
-  TextEditingController descriptionController=TextEditingController();
-  TextEditingController dateController=TextEditingController();
-  bool flag=false;
-  TodoClass? todoObj;
-  int count=0;
-  // dynamic getData(TodoClass x)async{
-  //   switch(){
-  //     case "title":
-  //       String title1=await getCustomerData(x, "title");
-  //       return title1;
-  //     case "description":
-  //       String des1=await getCustomerData(x, "description");
-  //       return des1;
-  //     case "date":
-  //       String date1=await getCustomerData(x, "date");
-  //       return date1;
 
-  //   }
-  // }
-  void submitData( bool flag,[TodoClass? obj]){
-        if(titleController.text.isNotEmpty&&descriptionController.text.isNotEmpty&&dateController.text.isNotEmpty){
+class _TodoAppState extends State<TodoApp> {
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController dateController = TextEditingController();
+  final DatabaseHelper dbHelper = DatabaseHelper();
 
-         TodoClass todoObj1= TodoClass(title:titleController.text,description: descriptionController.text,date: dateController.text);
-         insertDatainTodo(todoObj1);
-         count++;   
-    }else if(obj!=null){
-        TodoClass todoObj2= TodoClass(id:todoObj!.id,title:titleController.text,description: descriptionController.text,date: dateController.text);
-        updateDatainCustomer(todoObj2);
+  List<TodoClass> todos = [];
 
-    }
-    Navigator.of(context).pop();
+  @override
+  void initState() {
+    super.initState();
+    fetchTodos();
+  }
+
+  Future<void> fetchTodos() async {
+    final data = await dbHelper.fetchTodos();
     setState(() {
-      clearController();
+      todos = data;
     });
   }
-  void clearController(){
+
+  void submitData(bool isEdit,BuildContext context,[TodoClass? todo]) async {
+    if (titleController.text.isNotEmpty &&
+        descriptionController.text.isNotEmpty &&
+        dateController.text.isNotEmpty) {
+      if (isEdit && todo != null) {
+        final updatedTodo = TodoClass(
+          id: todo.id,
+          title: titleController.text,
+          description: descriptionController.text,
+          date: dateController.text,
+        );
+        await dbHelper.updateTodo(updatedTodo);
+      } else {
+        final newTodo = TodoClass(
+          title: titleController.text,
+          description: descriptionController.text,
+          date: dateController.text,
+        );
+        await dbHelper.insertTodo(newTodo);
+      }
+      Navigator.of(context).pop();
+      fetchTodos();
+      clearController();
+    }
+  }
+
+  void deleteData(int id) async {
+    await dbHelper.deleteTodo(id);
+    fetchTodos();
+  }
+
+  void clearController() {
     titleController.clear();
     descriptionController.clear();
     dateController.clear();
   }
-  void downSheet(flag,[TodoClass? obj]){
+
+  void downSheet(bool isEdit,BuildContext context,[TodoClass? todo]) {
+    if (isEdit && todo != null) {
+      titleController.text = todo.title;
+      descriptionController.text = todo.description;
+      dateController.text = todo.date;
+    }
     showModalBottomSheet(
       context: context, 
       isScrollControlled: true,
@@ -296,7 +414,8 @@ class _TodoAppState extends State{
             ),
             GestureDetector(
               onTap:(){
-                submitData(false,obj);
+                submitData(isEdit, context,todo);
+                //submitData(false,obj);
                 setState((){});
               },
               child: Container(
@@ -318,7 +437,7 @@ class _TodoAppState extends State{
                   color:const Color.fromRGBO(111, 81, 255, 1),
                 ),
                 child:Text(
-                  "Submit",
+                  isEdit?"Edit":"Submit",
                    style:GoogleFonts.inter(
                   fontSize: 20,
                   fontWeight: FontWeight.w700,
@@ -335,14 +454,58 @@ class _TodoAppState extends State{
         );
       }
       );
-      
+
+    // // showModalBottomSheet(
+    //   context: context,
+    //   isScrollControlled: true,
+    //   builder: (context) {
+    //     return Padding(
+    //       padding: MediaQuery.of(context).viewInsets,
+    //       child: Column(
+    //         mainAxisSize: MainAxisSize.min,
+    //         children: [
+    //           TextField(
+    //             controller: titleController,
+    //             decoration: const InputDecoration(labelText: 'Title'),
+    //           ),
+    //           TextField(
+    //             controller: descriptionController,
+    //             decoration: const InputDecoration(labelText: 'Description'),
+    //           ),
+    //           TextField(
+    //             controller: dateController,
+    //             readOnly: true,
+    //             decoration: const InputDecoration(labelText: 'Date'),
+    //             onTap: () async {
+    //               final selectedDate = await showDatePicker(
+    //                 context: context,
+    //                 initialDate: DateTime.now(),
+    //                 firstDate: DateTime(2020),
+    //                 lastDate: DateTime(2100),
+    //               );
+    //               if (selectedDate != null) {
+    //                 dateController.text = DateFormat.yMMMd().format(selectedDate);
+    //               }
+    //             },
+    //           ),
+    //           ElevatedButton(
+    //             onPressed: () {
+    //               submitData(isEdit, context,todo);
+    //             },
+    //             child: Text(isEdit ? 'Update' : 'Add'),
+    //           ),
+    //         ],
+    //       ),
+    //     );
+    //   },
+    // );
   }
-  
+
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(111, 81, 255, 1),
-      body:Column(
+      body: Column(
         children: [
           Container(
             margin: const EdgeInsets.only(
@@ -417,8 +580,9 @@ class _TodoAppState extends State{
                          )
                       ),
                       child:ListView.builder(
-                        itemCount:count,
+                        itemCount:todos.length,
                         itemBuilder: (context,index){
+                          var todo=todos[index];
                           return Slidable(
                             direction:Axis.horizontal,
                             key: const ValueKey(0),
@@ -441,11 +605,8 @@ class _TodoAppState extends State{
                                       ),
                                       child:GestureDetector(
                                         onTap:(){
-                                          titleController.text=todoObj!.title!;
-                                          descriptionController.text=todoObj!.description!;
-                                          dateController.text=todoObj!.date!;
-                                         downSheet(true,todoObj!);
-                                         setState((){});
+                                         downSheet(true,context,todo);
+                                       //  setState((){});
                                         },
                                         child: const Icon(
                                           Icons.edit_outlined,
@@ -466,8 +627,8 @@ class _TodoAppState extends State{
                                       ),
                                       child:GestureDetector(
                                         onTap:(){
-                                          deleteDatainCustomer(index);
-                                          setState((){});
+                                           deleteData(todo.id!);
+                                          //setState((){});
                                         },
                                         child: const Icon(
                                           Icons.delete_outline,
@@ -516,11 +677,12 @@ class _TodoAppState extends State{
                                   ),
                                   Expanded(
                                     child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Container(
                                           alignment: Alignment.centerLeft,
                                           child: Text(
-                                            "Title" ,
+                                            todo.title ,
                                             style:GoogleFonts.inter(
                                               fontSize: 15,
                                               fontWeight: FontWeight.w500,
@@ -533,7 +695,7 @@ class _TodoAppState extends State{
                                           height: 3,
                                         ),
                                         Text(
-                                         "Description" ,
+                                         todo.description ,
                                           style:GoogleFonts.inter(
                                             fontSize: 15,
                                             fontWeight: FontWeight.w400,
@@ -547,7 +709,7 @@ class _TodoAppState extends State{
                                         Container(
                                           alignment: Alignment.centerLeft,
                                           child: Text(
-                                            "Date",
+                                            todo.date,
                                             style:GoogleFonts.inter(
                                               fontSize: 15,
                                               fontWeight: FontWeight.w400,
@@ -577,8 +739,9 @@ class _TodoAppState extends State{
         shape: const CircleBorder(),
         backgroundColor: const Color.fromRGBO(111, 81, 255, 1),
         onPressed: (){
-          downSheet(false);
-         setState((){});
+           downSheet(false,context);
+        //   downSheet(false);
+        //  setState((){});
         
         },
         child:const Icon(
@@ -591,3 +754,593 @@ class _TodoAppState extends State{
   }
 }
 
+
+
+// import 'package:flutter/foundation.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter_svg/flutter_svg.dart';
+// import 'package:google_fonts/google_fonts.dart';
+// import 'package:flutter_slidable/flutter_slidable.dart';
+// import 'package:intl/intl.dart';
+// import 'modelclass.dart';
+// import 'backend.dart';
+
+
+
+// void main() {
+
+//   runApp(const MainApp());
+// }
+
+// class MainApp extends StatelessWidget {
+//   const MainApp({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return const MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       home: TodoApp(),
+//     );
+//   }
+// }
+// class TodoApp extends StatefulWidget{
+//   const TodoApp({super.key});
+//   @override
+//   State createState()=>_TodoAppState();
+// }
+// class _TodoAppState extends State{
+  
+//   TextEditingController titleController=TextEditingController();
+//   TextEditingController descriptionController=TextEditingController();
+//   TextEditingController dateController=TextEditingController();
+//   bool flag=false;
+//   TodoClass? todoObj;
+//   int count=0;
+//   // dynamic getData(TodoClass x)async{
+//   //   switch(){
+//   //     case "title":
+//   //       String title1=await getCustomerData(x, "title");
+//   //       return title1;
+//   //     case "description":
+//   //       String des1=await getCustomerData(x, "description");
+//   //       return des1;
+//   //     case "date":
+//   //       String date1=await getCustomerData(x, "date");
+//   //       return date1;
+
+//   //   }
+//   // }
+//   void submitData( bool flag,[TodoClass? obj]){
+//         if(titleController.text.isNotEmpty&&descriptionController.text.isNotEmpty&&dateController.text.isNotEmpty){
+
+//          TodoClass todoObj1= TodoClass(title:titleController.text,description: descriptionController.text,date: dateController.text);
+//          insertDatainTodo(todoObj1);
+//          count++;   
+//     }else if(obj!=null){
+//         TodoClass todoObj2= TodoClass(id:todoObj!.id,title:titleController.text,description: descriptionController.text,date: dateController.text);
+//         updateDatainCustomer(todoObj2);
+
+//     }
+//     Navigator.of(context).pop();
+//     setState(() {
+//       clearController();
+//     });
+//   }
+//   void clearController(){
+//     titleController.clear();
+//     descriptionController.clear();
+//     dateController.clear();
+//   }
+//   void downSheet(flag,[TodoClass? obj]){
+//     showModalBottomSheet(
+//       context: context, 
+//       isScrollControlled: true,
+//       builder: (context){
+//         return Column(
+//           mainAxisSize:MainAxisSize.min,
+//           children: [
+//             Container(
+//               height: 28,
+//               width: 160,
+//               margin:EdgeInsets.only(
+//                 bottom: MediaQuery.of(context).viewInsets.bottom,
+//                 top: 10,
+//                 left: 10,
+//                 right: 10,
+//               ),
+//               child: Text(
+//                 "Create To-Do",
+//                 style:GoogleFonts.quicksand(
+//                   fontWeight: FontWeight.w700,
+//                   fontSize: 22
+//                 ),
+//                 textAlign: TextAlign.center,
+//               ),
+//             ),
+//             Container(
+//              width: MediaQuery.of(context).size.width,
+//               margin: EdgeInsets.only(
+//                 left: 15,
+//                 top:10,
+//                 bottom: MediaQuery.of(context).viewInsets.bottom,
+//               ),
+//               child:Text(
+//                 "Title",
+//                 style:GoogleFonts.quicksand(
+//                   fontSize: 16,
+//                   fontWeight: FontWeight.w700,
+//                   color:const Color.fromRGBO(111, 81, 255, 1),
+//                 ),
+//                 textAlign: TextAlign.left,
+//               ),
+//             ),
+//             Container(
+//               height: 50,
+//                width: MediaQuery.of(context).size.width,
+//                margin:EdgeInsets.only(
+//                 left: 15,
+//                 right: 15,
+//                 bottom: MediaQuery.of(context).viewInsets.bottom,
+//                ),
+//                child: TextField(
+//                 controller:titleController,
+//                 style:GoogleFonts.quicksand(
+//                     fontSize: 20,
+//                     fontWeight: FontWeight.w600,
+//                     color: Colors.black,
+//                   ),
+//                 decoration: InputDecoration(
+//                   enabledBorder:const OutlineInputBorder(
+//                     borderRadius: BorderRadius.all(
+//                       Radius.circular(10)
+//                     ),
+//                     borderSide: BorderSide(
+//                       color: Colors.black, 
+//                      width: 1.0,
+//                     ),
+//                    ),
+//                    focusedBorder: const OutlineInputBorder(
+//                       borderSide: BorderSide(
+//                         color: Color.fromRGBO(111, 81, 255, 1),
+//                         width: 1.0,
+//                       ),
+//                     ),
+//                   hintText: "Enter Title",
+//                   hintStyle: GoogleFonts.quicksand(
+//                     fontSize: 20,
+//                     color: Colors.grey.shade600,
+//                   ),
+//                 ),
+//                 textAlign: TextAlign.left,
+//                ),
+//             ),
+//              Container(
+//              width: MediaQuery.of(context).size.width,
+//               margin:EdgeInsets.only(
+//                 left: 15,
+//                 top: 20,
+//                 bottom: MediaQuery.of(context).viewInsets.bottom,
+//                 ),
+//               child:Text(
+//                 "Description",
+//                  style:GoogleFonts.quicksand(
+//                   fontSize: 16,
+//                   fontWeight: FontWeight.w700,
+//                   color:const Color.fromRGBO(111, 81, 255, 1),
+//                 ),
+//                 textAlign: TextAlign.left,
+//               ),
+//             ),
+//              Container(
+//               height: 50,
+//               width: MediaQuery.of(context).size.width,
+//                margin:EdgeInsets.only(
+//                 left: 15,
+//                 right: 15,
+//                 bottom:MediaQuery.of(context).viewInsets.bottom,
+//                ),
+//                child: TextField(
+//                 controller:descriptionController,
+//                  style:GoogleFonts.quicksand(
+//                     fontSize: 20,
+//                     fontWeight: FontWeight.w600,
+//                     color: Colors.black,
+//                   ),
+//                 decoration: InputDecoration(
+//                   enabledBorder:const OutlineInputBorder(
+//                     borderRadius: BorderRadius.all(
+//                       Radius.circular(10)
+//                     ),
+//                     borderSide: BorderSide(
+//                       color: Colors.black, 
+//                      width: 1.0,
+//                     ),
+//                    ),
+//                    focusedBorder: const OutlineInputBorder(
+//                       borderSide: BorderSide(
+//                         color: Color.fromRGBO(111, 81, 255, 1),
+//                         width: 1.0,
+//                       ),
+//                     ),
+//                   hintText: "Enter Description",
+//                   hintStyle:GoogleFonts.quicksand(
+//                     fontSize: 20,
+//                     color:Colors.grey.shade600
+//                   ),
+                 
+//                 ),
+//                 textAlign: TextAlign.left,
+//                ),
+//             ),
+//             Container(
+//               width: MediaQuery.of(context).size.width,
+//               margin: EdgeInsets.only(
+//                 left: 15,
+//                 top: 20,
+//                 bottom: MediaQuery.of(context).viewInsets.bottom,
+//                 ),
+//               child:Text(
+//                 "Date",
+//                 style:GoogleFonts.quicksand(
+//                   fontSize: 16,
+//                   fontWeight: FontWeight.w700,
+//                   color:const Color.fromRGBO(111, 81, 255, 1),
+//                 ),
+//                 textAlign: TextAlign.left,
+//               ),
+//             ),
+//              Container(
+//               height: 50,
+//               width: MediaQuery.of(context).size.width,
+//                margin: EdgeInsets.only(
+//                 left: 15,
+//                 right: 15,
+//                 bottom: MediaQuery.of(context).viewInsets.bottom,
+//                ),
+//                child: TextField(
+                
+//                 controller:dateController,
+//                 style:GoogleFonts.quicksand(
+//                   fontSize: 20,
+//                   fontWeight: FontWeight.w600,
+//                   color: Colors.black,
+//                 ),
+                  
+//                 decoration: InputDecoration(
+//                   enabledBorder:const OutlineInputBorder(
+//                     borderRadius: BorderRadius.all(
+//                       Radius.circular(10)
+//                     ),
+//                     borderSide: BorderSide(
+//                       color: Colors.black, 
+//                      width: 1.0,
+//                     ),
+//                    ),
+//                    focusedBorder: const OutlineInputBorder(
+//                       borderSide: BorderSide(
+//                         color: Color.fromRGBO(111, 81, 255, 1), // Border color when focused
+//                         width: 1.0,
+//                       ),
+//                     ),
+//                   suffixIcon: const Icon(
+//                     Icons.calendar_month_outlined,
+//                   ),
+//                   hintText: "MM/DD/YYY",
+//                   hintStyle: GoogleFonts.quicksand(
+//                     fontSize: 20,
+//                     color:Colors.grey.shade600,
+//                   ),
+//                 ),
+//                 onTap:()async{
+//                 DateTime? pickDate=await showDatePicker(
+                  
+//                   context: context, 
+//                  // initialDate: DateTime.now(),
+//                   firstDate: DateTime(2024), 
+//                   lastDate: DateTime(2025),
+//                   );
+//                   String formatedDate=DateFormat.yMMMd().format(pickDate!);
+//                   dateController.text=formatedDate;
+//                   setState(() {
+                    
+//                   });
+//                },
+//                 textAlign: TextAlign.left,
+//                ),
+//               ),
+//             const SizedBox(
+//               height: 10,
+//             ),
+//             GestureDetector(
+//               onTap:(){
+//                 submitData(false,obj);
+//                 setState((){});
+//               },
+//               child: Container(
+//                 height: 60,
+//                 width:MediaQuery.of(context).size.width,
+//                 margin: EdgeInsets.only(
+//                   left: 30,
+//                   right: 30,
+//                   top: 20,
+//                   bottom:MediaQuery.of(context).viewInsets.bottom,
+//                 ),
+//                 padding: const EdgeInsets.only(
+//                   top: 15,
+//                   bottom: 15,
+//                 ),
+                
+//                 decoration: BoxDecoration(
+//                   borderRadius: BorderRadius.circular(10),
+//                   color:const Color.fromRGBO(111, 81, 255, 1),
+//                 ),
+//                 child:Text(
+//                   "Submit",
+//                    style:GoogleFonts.inter(
+//                   fontSize: 20,
+//                   fontWeight: FontWeight.w700,
+//                   color:Colors.white,
+//                 ),
+//                   textAlign: TextAlign.center,
+//                 ),
+//               ),
+//             ),
+//            const SizedBox(
+//             height: 20,
+//            ),
+//           ],
+//         );
+//       }
+//       );
+      
+//   }
+  
+//   @override
+//   Widget build(BuildContext context){
+//     return Scaffold(
+//       backgroundColor: const Color.fromRGBO(111, 81, 255, 1),
+//       body:Column(
+//         children: [
+//           Container(
+//             margin: const EdgeInsets.only(
+//               left: 30,
+//               top: 45,
+//             ),
+//             alignment: Alignment.centerLeft,
+//             child: Text(
+//               "Good Morning",
+//               style:GoogleFonts.quicksand(
+//                 fontSize: 22,
+//                 fontWeight: FontWeight.w400,
+//                 color: Colors.white,
+//               ),
+//               textAlign: TextAlign.left,
+//             ),
+//           ),
+//           Container(
+//             margin: const EdgeInsets.only(
+//               left: 30,
+//               bottom: 50,
+//             ),
+//             alignment: Alignment.centerLeft,
+//             child: Text(
+//               "Rutuja",
+//               style:GoogleFonts.quicksand(
+//                 fontSize: 30,
+//                 fontWeight: FontWeight.w600,
+//                 color: Colors.white,
+//               ),
+//               textAlign: TextAlign.left,
+//             ),
+//           ),
+//           Expanded(
+//             child: Container(
+//               padding: const EdgeInsets.only(
+//                 top: 15,
+//               ),
+//               width: MediaQuery.of(context).size.width,
+//               decoration:const BoxDecoration(
+//                 color: Color.fromRGBO(217, 217, 217, 1),
+//                 borderRadius: BorderRadius.only(
+//                   topLeft:Radius.circular(40),
+//                   topRight: Radius.circular(40)
+//                 )
+//               ),
+//               child:Column(
+//                 children: [
+//                   Text(
+//                     "CREATE TO DO LIST",
+//                     style:GoogleFonts.quicksand(
+//                       fontSize: 15,
+//                       fontWeight: FontWeight.w600,
+//                     ),
+//                     textAlign: TextAlign.center,
+//                   ),
+//                   Expanded(
+//                     child: Container(
+//                       padding: const EdgeInsets.only(
+//                         top:10,
+//                         left: 10,
+//                         right: 10,
+//                       ),
+//                       margin: const EdgeInsets.only(
+//                         top: 15,
+//                       ),
+//                       decoration:const BoxDecoration(
+//                         color: Color.fromRGBO(255, 255, 255, 1),
+//                         borderRadius: BorderRadius.only(
+//                           topLeft:Radius.circular(40),
+//                           topRight: Radius.circular(40)
+//                          )
+//                       ),
+//                       child:ListView.builder(
+//                         itemCount:count,
+//                         itemBuilder: (context,index){
+//                           return Slidable(
+//                             direction:Axis.horizontal,
+//                             key: const ValueKey(0),
+//                             endActionPane: ActionPane(
+//                               motion: const ScrollMotion(), 
+//                               children: [
+//                                 Column(
+//                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                                   crossAxisAlignment: CrossAxisAlignment.end,
+//                                   children: [
+//                                     Container(
+//                                       height: 42,
+//                                       width: 42,
+//                                       margin: const EdgeInsets.only(
+//                                         left: 20,
+//                                       ),
+//                                       decoration:const BoxDecoration(
+//                                         shape: BoxShape.circle,
+//                                         color: Color.fromRGBO(111, 81, 255, 1),
+//                                       ),
+//                                       child:GestureDetector(
+//                                         onTap:(){
+//                                          downSheet(true,context,todo);
+//                                        //  setState((){});
+//                                         },
+//                                         child: const Icon(
+//                                           Icons.edit_outlined,
+//                                           size:15,
+//                                           color: Colors.white,
+//                                         ),
+//                                       )
+//                                     ),
+//                                     Container(
+//                                       height: 42,
+//                                       width: 42,
+//                                        margin: const EdgeInsets.only(
+//                                         left: 20,
+//                                       ),
+//                                       decoration:const BoxDecoration(
+//                                         shape: BoxShape.circle,
+//                                         color: Color.fromRGBO(111, 81, 255, 1),
+//                                       ),
+//                                       child:GestureDetector(
+//                                         onTap:(){
+//                                            deleteData(todo.id!);
+//                                           //setState((){});
+//                                         },
+//                                         child: const Icon(
+//                                           Icons.delete_outline,
+//                                           size:15,
+//                                           color: Colors.white,
+//                                         ),
+//                                       )
+//                                     ),
+//                                   ],
+//                                 ),
+//                               ]
+//                               ),
+//                             child:Container(
+//                               padding: const EdgeInsets.all(10),
+//                               margin: const EdgeInsets.only(
+//                                 bottom: 10,
+//                               ),
+//                               decoration: const BoxDecoration(
+//                                 color: Colors.white,
+//                                 boxShadow:[BoxShadow(
+//                                   color: Color.fromRGBO(0, 0, 0, 0.16),
+//                                   blurRadius: 12,
+//                                   spreadRadius: 0,
+//                                   offset: Offset(0, -4),
+//                                 )]
+//                               ),
+//                               child:Row(
+//                                 children: [
+//                                   Container(
+//                                     height: 52,
+//                                     width: 52,
+//                                     clipBehavior: Clip.antiAlias,
+//                                     decoration:const BoxDecoration(
+//                                       color: Color.fromRGBO(217, 217, 217, 1),
+//                                       shape: BoxShape.circle,
+//                                     ),
+//                                     child:SvgPicture.asset(
+//                                       "assets/Group 42 (1).svg",
+//                                       height: 19,
+//                                       width: 23,
+//                                       fit: BoxFit.scaleDown,
+//                                     )
+//                                   ),
+//                                   const SizedBox(
+//                                     width: 20,
+//                                   ),
+//                                   Expanded(
+//                                     child: Column(
+//                                       children: [
+//                                         Container(
+//                                           alignment: Alignment.centerLeft,
+//                                           child: Text(
+//                                             todo.title ,
+//                                             style:GoogleFonts.inter(
+//                                               fontSize: 15,
+//                                               fontWeight: FontWeight.w500,
+//                                               color:Colors.black,
+//                                             ),
+//                                             textAlign: TextAlign.left,
+//                                           ),
+//                                         ),
+//                                         const SizedBox(
+//                                           height: 3,
+//                                         ),
+//                                         Text(
+//                                          todo.description ,
+//                                           style:GoogleFonts.inter(
+//                                             fontSize: 15,
+//                                             fontWeight: FontWeight.w400,
+//                                             color:Colors.black,
+//                                           ),
+//                                           textAlign: TextAlign.left,
+//                                         ),
+//                                         const SizedBox(
+//                                           height: 3,
+//                                         ),
+//                                         Container(
+//                                           alignment: Alignment.centerLeft,
+//                                           child: Text(
+//                                             todo.date,
+//                                             style:GoogleFonts.inter(
+//                                               fontSize: 15,
+//                                               fontWeight: FontWeight.w400,
+//                                               color:Colors.black,
+//                                             ),
+//                                             textAlign: TextAlign.left,
+//                                           ),
+//                                         ),
+//                                       ],
+//                                     ),
+//                                   ),
+//                                 ],
+//                               ),
+//                             ),
+//                           );
+//                         },
+//                       )
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           ),
+//         ],
+//       ),
+//       floatingActionButton:FloatingActionButton(
+//         shape: const CircleBorder(),
+//         backgroundColor: const Color.fromRGBO(111, 81, 255, 1),
+//         onPressed: (){
+//           downSheet(false);
+//          setState((){});
+        
+//         },
+//         child:const Icon(
+//           Icons.add,
+//           color: Colors.white,
+//           size: 25,
+//         ),
+//       ),
+//     );
+//   }
+// }

@@ -1,12 +1,8 @@
-import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grosary_app/login.dart';
-import 'package:grosary_app/sessiondata.dart';
-// import 'package:petcare/homePage.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:google_sign_in/google_sign_in.dart';
-// import 'package:petcare/signup.dart';
 
 class Signin extends StatefulWidget {
   const Signin({super.key});
@@ -19,7 +15,7 @@ class _SigninState extends State {
       TextEditingController();
   final TextEditingController _passwordTextEditingController =
       TextEditingController();
-  // final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   bool _isPasswordVisible = false;
   // final FirebaseAuth auth = FirebaseAuth.instance;
 
@@ -192,47 +188,46 @@ class _SigninState extends State {
               ),
               
               GestureDetector(
-                // onTap: () async {
-                //   log("Login button clicked");
-                //   String email = _eamilTextEditingController.text.trim();
-                //   String password =
-                //       _passwordTextEditingController.text.trim();
-                //   log("Email: $email");
-                //   log("Password: $password");
-                //   if (email.isNotEmpty && password.isNotEmpty) {
-                //     log("Both fields are filled");
-                //     try {
-                //       await SessionData.storeSessionData(
-                //           loginData: true, email: '');
-                //       await _firebaseAuth.signInWithEmailAndPassword(
-                //           email: email, password: password);
-                //       log("Login Successful");
-                //       Navigator.pushReplacement(
-                //         context,
-                //         MaterialPageRoute(
-                //             builder: (context) => const Homepage()),
-                //       );
-                //     } on FirebaseAuthException catch (error) {
-                //       log("Firebase Auth Error: ${error.code}");
-                //       ScaffoldMessenger.of(context).showSnackBar(
-                //          const SnackBar(
-                //             content: Text(
-                //               "Login Failed"
-                //               ),
-                //               backgroundColor: Colors.red,
-                //             )
-                //         );
-                //     }
-                //   } else {
-                //             log('Email or Password is empty');
-                //             ScaffoldMessenger.of(context).showSnackBar(
-                //               const SnackBar(
-                //                 content: Text("Please fill out all fields."),
-                //                 backgroundColor: Colors.red,
-                //               ),
-                //             );
-                //           }
-                // },
+                onTap: () async {
+                        if (_eamilTextEditingController.text
+                                .trim()
+                                .isNotEmpty &&
+                            _passwordTextEditingController.text
+                                .trim()
+                                .isNotEmpty) {
+                          try {
+                            // ignore: unused_local_variable
+                            UserCredential userCredential =
+                                await _firebaseAuth
+                                    .createUserWithEmailAndPassword(
+                              email: _eamilTextEditingController.text,
+                              password: _passwordTextEditingController.text,
+                            );
+                            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context){
+                              return const Login();
+                            }));
+                            setState(() {
+                               _eamilTextEditingController.clear();
+                           _passwordTextEditingController.clear();
+                            });
+                          } on FirebaseAuthException catch (error) {
+                             ScaffoldMessenger.of(context)
+                          .showSnackBar( SnackBar(
+                        content: Text("${error.message}"),
+                        backgroundColor: Colors.red,
+                      ));
+                          }
+                          setState(() {});
+                        } else {
+                           ScaffoldMessenger.of(context)
+                          .showSnackBar(const SnackBar(
+                        content: Text("Please enter valid fields"),
+                        backgroundColor: Colors.red,
+                      ));
+                           
+                    
+                        }
+                },
                 child: Container(
                   height: 50,
                   width: 340,

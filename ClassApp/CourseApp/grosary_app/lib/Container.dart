@@ -8,7 +8,7 @@ class ModelContainer {
       onTap:(){
         Navigator.of(context).push(
           MaterialPageRoute(builder: (context){
-            return Detailinfo(image1:image,title1:title,desc1:desc,price1:price,orderCount:initialcount,id1: id,index1: index);
+            return Detailinfo(image1:image,title1:title,desc1:desc,price1:price,orderCount:initialcount,id1: id,index1: index,falg: false,);
           })
         );
       },
@@ -56,7 +56,7 @@ class ModelContainer {
            Row(
              children: [
                Text(
-             "${price}",
+             "₹${price}",
              style: GoogleFonts.dmSans(
                fontWeight: FontWeight.w700,
                fontSize: 17,
@@ -64,7 +64,7 @@ class ModelContainer {
              ),
            ),
            const SizedBox(
-             width: 40,
+             width: 60,
            ),
            Container(
              height: 45,

@@ -1,9 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:grosary_app/cart.dart';
-import 'package:grosary_app/favourit.dart';
-import 'package:grosary_app/home.dart';
-import 'package:grosary_app/payment.dart';
+import 'package:grosary_app/splashscreen.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,7 +21,8 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: HomePage(),
+      debugShowCheckedModeBanner: false,
+      home: Splashscreen(),
     );
   }
 }

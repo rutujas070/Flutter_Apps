@@ -1,11 +1,10 @@
+
 import 'dart:developer';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:grosary_app/sessiondata.dart';
-// import 'package:petcare/homePage.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:google_sign_in/google_sign_in.dart';
-// import 'package:petcare/signup.dart';
+import 'package:grosary_app/home1.dart';
+import 'package:grosary_app/signin.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -18,7 +17,7 @@ class _LoginState extends State {
       TextEditingController();
   final TextEditingController _passwordTextEditingController =
       TextEditingController();
-  // final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   bool _isPasswordVisible = false;
   // final FirebaseAuth auth = FirebaseAuth.instance;
 
@@ -96,7 +95,7 @@ class _LoginState extends State {
                   style: GoogleFonts.dmSans(
                     fontWeight: FontWeight.w700,
                     fontSize: 18,
-                    color: const Color.fromRGBO(124, 124, 124, 1),
+                    color: Colors.black
                   ),
                 ),
               ),
@@ -123,7 +122,7 @@ class _LoginState extends State {
                     hintStyle: GoogleFonts.dmSans(
                       fontWeight: FontWeight.w700,
                       fontSize: 18,
-                      color:Colors.black
+                      color: const Color.fromRGBO(124, 124, 124, 1),
                     ),
                   ),
                 ),
@@ -140,7 +139,7 @@ class _LoginState extends State {
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w700,
                     fontSize: 18,
-                     color: const Color.fromRGBO(124, 124, 124, 1),
+                     color:Colors.black
                   ),
                 ),
               ),
@@ -181,7 +180,7 @@ class _LoginState extends State {
                     hintStyle: GoogleFonts.dmSans(
                       fontWeight: FontWeight.w700,
                       fontSize: 18,
-                      color: Colors.black
+                      color: const Color.fromRGBO(124, 124, 124, 1),
                     ),
                   ),
                 ),
@@ -206,47 +205,43 @@ class _LoginState extends State {
                 height: 20,
               ),
               GestureDetector(
-                // onTap: () async {
-                //   log("Login button clicked");
-                //   String email = _eamilTextEditingController.text.trim();
-                //   String password =
-                //       _passwordTextEditingController.text.trim();
-                //   log("Email: $email");
-                //   log("Password: $password");
-                //   if (email.isNotEmpty && password.isNotEmpty) {
-                //     log("Both fields are filled");
-                //     try {
-                //       await SessionData.storeSessionData(
-                //           loginData: true, email: '');
-                //       await _firebaseAuth.signInWithEmailAndPassword(
-                //           email: email, password: password);
-                //       log("Login Successful");
-                //       Navigator.pushReplacement(
-                //         context,
-                //         MaterialPageRoute(
-                //             builder: (context) => const Homepage()),
-                //       );
-                //     } on FirebaseAuthException catch (error) {
-                //       log("Firebase Auth Error: ${error.code}");
-                //       ScaffoldMessenger.of(context).showSnackBar(
-                //          const SnackBar(
-                //             content: Text(
-                //               "Login Failed"
-                //               ),
-                //               backgroundColor: Colors.red,
-                //             )
-                //         );
-                //     }
-                //   } else {
-                //             log('Email or Password is empty');
-                //             ScaffoldMessenger.of(context).showSnackBar(
-                //               const SnackBar(
-                //                 content: Text("Please fill out all fields."),
-                //                 backgroundColor: Colors.red,
-                //               ),
-                //             );
-                //           }
-                // },
+                onTap: () async {
+                  log("Login button clicked");
+                  String email = _eamilTextEditingController.text.trim();
+                  String password =
+                      _passwordTextEditingController.text.trim();
+                  if (email.isNotEmpty && password.isNotEmpty) {
+                    log("Both fields are filled");
+                    try {
+                      await _firebaseAuth.signInWithEmailAndPassword(
+                          email: email, password: password);
+                      log("Login Successful");
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomePage1()),
+                      );
+                    } on FirebaseAuthException catch (error) {
+                      log("Firebase Auth Error: ${error.code}");
+                      ScaffoldMessenger.of(context).showSnackBar(
+                         const SnackBar(
+                            content: Text(
+                              "Login Failed"
+                              ),
+                              backgroundColor: Colors.red,
+                            )
+                        );
+                    }
+                  } else {
+                            log('Email or Password is empty');
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text("Please fill out all fields."),
+                                backgroundColor: Colors.red,
+                              ),
+                            );
+                          }
+                },
                 child: Container(
                   height: 50,
                   width: 340,
@@ -279,7 +274,7 @@ class _LoginState extends State {
                 GestureDetector(
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const Login()));
+                        MaterialPageRoute(builder: (context) => const Signin()));
                       setState(() { });
                   },
                   child: Text(

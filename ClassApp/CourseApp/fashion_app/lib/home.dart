@@ -261,14 +261,10 @@ setState(() {
                         setState(() {});
                       },
                       child: Container(
-                        //color: Colors.amber,
-                        // height:300,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                              //color: Colors.pink,
-                              //   height: 20,
                               child: Stack(
                                 children: [
                                   Image.asset(

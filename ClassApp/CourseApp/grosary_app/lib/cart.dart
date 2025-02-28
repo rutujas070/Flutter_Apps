@@ -1,8 +1,11 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grosary_app/Exploar.dart';
 import 'package:grosary_app/favourit.dart';
-import 'package:grosary_app/home.dart';
+import 'package:grosary_app/home1.dart';
 import 'package:grosary_app/payment.dart';
 
 class Cart extends StatefulWidget {
@@ -45,15 +48,14 @@ class _CartState extends State<Cart> {
                     ),
                   ],
                 ),
-                 const SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
-                 const Divider(
-                            indent: 0,
-                            endIndent: 0,
-                            height: 2,
-                            
-                          ),
+                const Divider(
+                  indent: 0,
+                  endIndent: 0,
+                  height: 2,
+                ),
                 const SizedBox(
                   height: 15,
                 ),
@@ -67,7 +69,7 @@ class _CartState extends State<Cart> {
                         color: const Color.fromRGBO(124, 124, 124, 1),
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Row(
                       children: [
                         Text(
@@ -93,15 +95,15 @@ class _CartState extends State<Cart> {
                 const SizedBox(
                   height: 15,
                 ),
-                 const Divider(
-                            indent: 0,
-                            endIndent: 0,
-                            height: 2,
-                          ),
+                const Divider(
+                  indent: 0,
+                  endIndent: 0,
+                  height: 2,
+                ),
                 const SizedBox(
                   height: 15,
                 ),
-                 Row(
+                Row(
                   children: [
                     Text(
                       "Pament",
@@ -111,10 +113,14 @@ class _CartState extends State<Cart> {
                         color: const Color.fromRGBO(124, 124, 124, 1),
                       ),
                     ),
-                   const Spacer(),
+                    const Spacer(),
                     Row(
                       children: [
-                        Image.asset("assets/images/card.png",height: 20,width: 20,),
+                        Image.asset(
+                          "assets/images/card.png",
+                          height: 20,
+                          width: 20,
+                        ),
                         const SizedBox(
                           width: 10,
                         ),
@@ -130,15 +136,15 @@ class _CartState extends State<Cart> {
                 const SizedBox(
                   height: 15,
                 ),
-                 const Divider(
-                           indent: 0,
-                            endIndent: 0,
-                            height: 2,
-                          ),
+                const Divider(
+                  indent: 0,
+                  endIndent: 0,
+                  height: 2,
+                ),
                 const SizedBox(
                   height: 15,
                 ),
-                 Row(
+                Row(
                   children: [
                     Text(
                       "Promo Code",
@@ -148,7 +154,7 @@ class _CartState extends State<Cart> {
                         color: const Color.fromRGBO(124, 124, 124, 1),
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Row(
                       children: [
                         Text(
@@ -174,15 +180,15 @@ class _CartState extends State<Cart> {
                 const SizedBox(
                   height: 15,
                 ),
-                 const Divider(
-                            indent: 0,
-                            endIndent: 0,
-                            height: 2,
-                          ),
+                const Divider(
+                  indent: 0,
+                  endIndent: 0,
+                  height: 2,
+                ),
                 const SizedBox(
                   height: 15,
                 ),
-                 Row(
+                Row(
                   children: [
                     Text(
                       "Total Cost",
@@ -192,7 +198,7 @@ class _CartState extends State<Cart> {
                         color: const Color.fromRGBO(124, 124, 124, 1),
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Row(
                       children: [
                         Text(
@@ -218,54 +224,55 @@ class _CartState extends State<Cart> {
                 const SizedBox(
                   height: 15,
                 ),
-                 const Divider(
-                            indent: 0,
-                            endIndent: 0,
-                            height: 2,
-                          ),
+                const Divider(
+                  indent: 0,
+                  endIndent: 0,
+                  height: 2,
+                ),
                 const SizedBox(
                   height: 15,
                 ),
                 Text(
-                          "By placing an order you agree to our\nTerms And Conditions",
-                          style: GoogleFonts.dmSans(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 15,
-                            color: Colors.black,
-                          ),
-                          textAlign:TextAlign.left,
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                         Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10,bottom: 20),
-              child: GestureDetector(
-                onTap:(){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                    return PaymentComplete();
-                  }));
-                },
-                child: Container(
-                  height: 60,
-                  width: 370,
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: const Color.fromRGBO(83, 177, 117, 1),
+                  "By placing an order you agree to our\nTerms And Conditions",
+                  style: GoogleFonts.dmSans(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 15,
+                    color: Colors.black,
                   ),
-                  alignment: Alignment.center,
-                
-                   child: Text(
-                      "Place Order",
-                      style: GoogleFonts.dmSans(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 20,
-                          color: Colors.white),
-                    ),
+                  textAlign: TextAlign.left,
                 ),
-              ),
-            ),
+                const SizedBox(
+                  height: 15,
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.only(left: 10, right: 10, bottom: 20),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (context) {
+                        return const PaymentComplete();
+                      }));
+                    },
+                    child: Container(
+                      height: 60,
+                      width: 370,
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: const Color.fromRGBO(83, 177, 117, 1),
+                      ),
+                      alignment: Alignment.center,
+                      child: Text(
+                        "Place Order",
+                        style: GoogleFonts.dmSans(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 20,
+                            color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           );
@@ -279,37 +286,85 @@ class _CartState extends State<Cart> {
     });
   }
 
-  List<Map<String, dynamic>> imageList = [
-    {
-      "image": "assets/homepage/genger.png",
-      "title": "Ginger",
-      "desc": "250gm, Priceg",
-      "price": "\$3.20"
-    },
-    {
-      "image": "assets/homepage/chili.png",
-      "title": "Bell Pepper Red",
-      "desc": "1kg, Priceg",
-      "price": "\$1.50"
-    },
-    {
-      "image": "assets/homepage/banana.png",
-      "title": "Organic Bananas",
-      "desc": "7pcs,Priceg",
-      "price": "\$4.00"
-    },
-    {
-      "image": "assets/homepage/apple.png",
-      "title": "Red Apple",
-      "desc": "1kg, Priceg",
-      "price": "\$1.00"
-    },
-  ];
+  // List<Map<String, dynamic>> imageList = [
+  //   {
+  //     "image": "assets/homepage/genger.png",
+  //     "title": "Ginger",
+  //     "desc": "250gm, Priceg",
+  //     "price": "\$3.20"
+  //   },
+  //   {
+  //     "image": "assets/homepage/chili.png",
+  //     "title": "Bell Pepper Red",
+  //     "desc": "1kg, Priceg",
+  //     "price": "\$1.50"
+  //   },
+  //   {
+  //     "image": "assets/homepage/banana.png",
+  //     "title": "Organic Bananas",
+  //     "desc": "7pcs,Priceg",
+  //     "price": "\$4.00"
+  //   },
+  //   {
+  //     "image": "assets/homepage/apple.png",
+  //     "title": "Red Apple",
+  //     "desc": "1kg, Priceg",
+  //     "price": "\$1.00"
+  //   },
+  // ];
+
+  //GET DATA FROM CART COLLECTION
+  List<Map<String,dynamic>> cartAllData = [];
+  bool isLoading=false;
+  Future<void> fun() async {
+    log("-----IN FUN------");
+    setState(() {
+      isLoading=true;
+    });
+    try{
+    QuerySnapshot response =
+        await FirebaseFirestore.instance.collection('Cart').get();
+    cartAllData.clear();
+    for (var doc in response.docs) {
+      log("Adding data to the list");
+      cartAllData.add(
+        {
+          'imagepath': doc['image'],
+          'title': doc['title'],
+          'desc': doc['desc'],
+          'price': doc['price'],
+          'count': doc['count'],
+          'id2': doc.id,
+        
+    }
+    
+      );
+    }
+    }catch(e){
+      log("$e");
+    }finally{
+      setState(() {
+        isLoading=false;
+      });
+    }
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fun();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
+        child: isLoading
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : Column(
           children: [
             const SizedBox(
               height: 50,
@@ -323,9 +378,10 @@ class _CartState extends State<Cart> {
               ),
             ),
             Expanded(
+              // ignore: avoid_unnecessary_containers
               child: Container(
                 child: ListView.builder(
-                    itemCount: imageList.length,
+                    itemCount: cartAllData.length,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return Padding(
@@ -345,10 +401,14 @@ class _CartState extends State<Cart> {
                               ),
                               Container(
                                 padding:
-                                    const EdgeInsets.only(left: 10, bottom: 10),
+                                    const EdgeInsets.only(left: 20, bottom: 10),
                                 child: Row(
                                   children: [
-                                    Image.asset(imageList[index]['image']),
+                                    Container(
+                                      height: 100,
+                                      width: 100,
+                                      alignment: Alignment.center,
+                                      child: Image.asset(cartAllData[index]['imagepath'])),
                                     const SizedBox(
                                       width: 20,
                                     ),
@@ -358,13 +418,14 @@ class _CartState extends State<Cart> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
+                                        // ignore: sized_box_for_whitespace
                                         Container(
                                           width:
                                               260, // Ensures the Row has bounded width
                                           child: Row(
                                             children: [
                                               Text(
-                                                imageList[index]['title'],
+                                                cartAllData[index]['title'],
                                                 style: GoogleFonts.dmSans(
                                                   fontWeight: FontWeight.w700,
                                                   fontSize: 20,
@@ -372,11 +433,29 @@ class _CartState extends State<Cart> {
                                                 ),
                                               ),
                                               const Spacer(),
-                                              const Icon(
-                                                Icons.clear,
-                                                color: Color.fromRGBO(
-                                                    124, 124, 124, 1),
-                                                size: 30,
+                                              GestureDetector(
+                                                onTap: () async {
+                                                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text("Item Remove From Cart",style: TextStyle(
+                      fontSize: 20
+                    ),),
+                    ));
+                                                  await FirebaseFirestore
+                                                      .instance
+                                                      .collection('Cart')
+                                                      .doc(cartAllData[index]['id2'])
+                                                      .delete();
+                                                      setState(() {
+                                                        
+                                                      });
+                                                      cartAllData.removeAt(index);
+                                                },
+                                                child: const Icon(
+                                                  Icons.clear,
+                                                  color: Color.fromRGBO(
+                                                      124, 124, 124, 1),
+                                                  size: 30,
+                                                ),
                                               ),
                                             ],
                                           ),
@@ -385,7 +464,7 @@ class _CartState extends State<Cart> {
                                           height: 5,
                                         ),
                                         Text(
-                                          imageList[index]['desc'],
+                                          cartAllData[index]['desc'],
                                           style: GoogleFonts.dmSans(
                                             fontWeight: FontWeight.w700,
                                             fontSize: 17,
@@ -398,11 +477,19 @@ class _CartState extends State<Cart> {
                                         ),
                                         Row(
                                           children: [
-                                            const Icon(
-                                              Icons.remove,
-                                              color: Color.fromRGBO(
-                                                  124, 124, 124, 1),
-                                              size: 30,
+                                            GestureDetector(
+                                              onTap:(){
+                                                cartAllData[index]['count']--;
+                                                setState(() {
+                                                  
+                                                });
+                                              },
+                                              child: const Icon(
+                                                Icons.remove,
+                                                color: Color.fromRGBO(
+                                                    124, 124, 124, 1),
+                                                size: 30,
+                                              ),
                                             ),
                                             const SizedBox(
                                               width: 10,
@@ -421,7 +508,7 @@ class _CartState extends State<Cart> {
                                                           10)),
                                               alignment: Alignment.center,
                                               child: Text(
-                                                "1",
+                                                "${cartAllData[index]['count']}",
                                                 style: GoogleFonts.dmSans(
                                                   fontWeight: FontWeight.w700,
                                                   fontSize: 20,
@@ -432,17 +519,25 @@ class _CartState extends State<Cart> {
                                             const SizedBox(
                                               width: 10,
                                             ),
-                                            const Icon(
-                                              Icons.add,
-                                              color: Color.fromRGBO(
-                                                  83, 177, 117, 1),
-                                              size: 30,
+                                            GestureDetector(
+                                              onTap:(){
+                                                cartAllData[index]['count']++;
+                                                setState(() {
+                                                  
+                                                });
+                                              },
+                                              child: const Icon(
+                                                Icons.add,
+                                                color: Color.fromRGBO(
+                                                    83, 177, 117, 1),
+                                                size: 30,
+                                              ),
                                             ),
                                             const SizedBox(
                                               width: 80,
                                             ),
                                             Text(
-                                              imageList[index]['price'],
+                                              "₹${cartAllData[index]['price']}",
                                               style: GoogleFonts.dmSans(
                                                 fontWeight: FontWeight.w700,
                                                 fontSize: 20,
@@ -531,7 +626,7 @@ class _CartState extends State<Cart> {
                   _onItemTapped(0);
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
-                    return const HomePage();
+                    return const HomePage1();
                   }));
                 },
                 child: const Icon(Icons.storefront)),

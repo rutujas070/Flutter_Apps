@@ -1,9 +1,11 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grosary_app/Exploar.dart';
 import 'package:grosary_app/cart.dart';
-import 'package:grosary_app/home.dart';
+import 'package:grosary_app/home1.dart';
 
 class Favourite extends StatefulWidget {
   const Favourite({super.key});
@@ -21,43 +23,102 @@ class _FavouriteState extends State<Favourite> {
     });
   }
 
-  List<Map<String, dynamic>> imageList = [
-    {
-      "image": "assets/beverage/apple1.png",
-      "title": "Apple Juice",
-      "desc": "2L, Price",
-      "price": "\$3.20"
-    },
-    {
-      "image": "assets/beverage/grape.png",
-      "title": "Orenge Juice",
-      "desc": "2L, Price",
-      "price": "\$3.50"
-    },
-    {
-      "image": "assets/beverage/pngfuel 11.png",
-      "title": "Diet Coke",
-      "desc": "355ml, Price",
-      "price": "\$1.99"
-    },
-    {
-      "image": "assets/beverage/pngfuel 12.png",
-      "title": "Sprite Can",
-      "desc": "325ml, Price",
-      "price": "\$1.90"
-    },
-    {
-      "image": "assets/beverage/pngfuel 13.png",
-      "title": "Coca Cola Can",
-      "desc": "325ml, Price",
-      "price": "\$1.00"
-    },
-  ];
+  // List<Map<String, dynamic>> imageList = [
+  //   {
+  //     "image": "assets/beverage/apple1.png",
+  //     "title": "Apple Juice",
+  //     "desc": "2L, Price",
+  //     "price": "\$3.20"
+  //   },
+  //   {
+  //     "image": "assets/beverage/grape.png",
+  //     "title": "Orenge Juice",
+  //     "desc": "2L, Price",
+  //     "price": "\$3.50"
+  //   },
+  //   {
+  //     "image": "assets/beverage/pngfuel 11.png",
+  //     "title": "Diet Coke",
+  //     "desc": "355ml, Price",
+  //     "price": "\$1.99"
+  //   },
+  //   {
+  //     "image": "assets/beverage/pngfuel 12.png",
+  //     "title": "Sprite Can",
+  //     "desc": "325ml, Price",
+  //     "price": "\$1.90"
+  //   },
+  //   {
+  //     "image": "assets/beverage/pngfuel 13.png",
+  //     "title": "Coca Cola Can",
+  //     "desc": "325ml, Price",
+  //     "price": "\$1.00"
+  //   },
+  // ];
+
+  List<Map<String,dynamic>> allData = [];
+  bool isLoading = false;
+  Future<void> fun() async {
+    log("-----IN FUN------");
+    setState(() {
+      isLoading=true;
+    });
+
+     try{
+      QuerySnapshot response =
+        await FirebaseFirestore.instance.collection('Favourite').get();
+    allData.clear();
+    for (var doc in response.docs) {
+      log("Adding data to the list");
+      allData.add(
+        {
+          'imagepath': doc['image'],
+          'title': doc['title'],
+          'desc': doc['desc'],
+         'price': doc['price'],
+          'count': doc['count'],
+          // 'flag': doc['flag'] ?? false,
+          'id2': doc.id,
+        
+    }
+      );
+      log("${allData[0]['price']}");
+    }
+     }catch(e){
+        log("$e");
+     }finally{
+      setState(() {
+        isLoading=false;
+      });
+     }
+    setState(() {
+      
+    });
+    // setState(() {
+    //   log("${allData[0].count} items loaded");
+    //   log("${allData.length} items loaded");
+    // });
+  }
+ 
+
+
+  void initState() {
+    super.initState();
+    fun();
+    setState(() {
+      
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
+        child:  isLoading
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          :Column(
           children: [
             const SizedBox(
               height: 50,
@@ -70,9 +131,9 @@ class _FavouriteState extends State<Favourite> {
                 color: Colors.black,
               ),
             ),
-            Expanded(
+           Expanded(
                 child: ListView.builder(
-                    itemCount: imageList.length,
+                    itemCount: allData.length,
                     itemBuilder: (context, index) {
                       return Column(
                         children: [
@@ -86,15 +147,16 @@ class _FavouriteState extends State<Favourite> {
                             height: 10,
                           ),
                           Container(
-                            padding: const EdgeInsets.only(left:10,right: 10,bottom: 10),
+                            padding: const EdgeInsets.only(
+                                left: 10, right: 10, bottom: 10),
                             child: Row(
                               children: [
                                 Container(
-                                  height:90,
-                                  width: 60,
-                                  alignment: Alignment.center,
-
-                                  child: Image.asset(imageList[index]['image'])),
+                                    height: 90,
+                                    width: 60,
+                                    alignment: Alignment.center,
+                                    child:
+                                        Image.asset(allData[index]['imagepath'])),
                                 const SizedBox(
                                   width: 20,
                                 ),
@@ -103,7 +165,7 @@ class _FavouriteState extends State<Favourite> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Text(
-                                      imageList[index]['title'],
+                                      allData[index]['title'],
                                       style: GoogleFonts.dmSans(
                                         fontWeight: FontWeight.w700,
                                         fontSize: 20,
@@ -114,7 +176,7 @@ class _FavouriteState extends State<Favourite> {
                                       height: 5,
                                     ),
                                     Text(
-                                      imageList[index]['desc'],
+                                      allData[index]['desc'],
                                       style: GoogleFonts.dmSans(
                                         fontWeight: FontWeight.w700,
                                         fontSize: 17,
@@ -131,22 +193,30 @@ class _FavouriteState extends State<Favourite> {
                                 Row(
                                   children: [
                                     Text(
-                                              imageList[index]['price'],
-                                              style: GoogleFonts.dmSans(
-                                                fontWeight: FontWeight.w700,
-                                                fontSize: 20,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              width: 10,
-                                            ),
-                                             const Icon(
-                                              Icons.arrow_forward_ios,
-                                              color:
-                                                  Colors.black,
-                                              size: 25,
-                                            ),
+                                      "₹${allData[index]['price']}",
+                                      style: GoogleFonts.dmSans(
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 20,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        // Navigator.of(context).push(
+                                        //     MaterialPageRoute(
+                                        //         builder: (context) {
+                                        //   return Detailinfo(image1: allData[index].imagepath, title1: allData[index].title, desc1: allData[index].desc, price1: allData[index].price, orderCount: allData[index].count, id1: allData[index].id2,index1: index,falg: false,);
+                                        // }));
+                                      },
+                                      child: const Icon(
+                                        Icons.arrow_forward_ios,
+                                        color: Colors.black,
+                                        size: 25,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ],
@@ -156,24 +226,45 @@ class _FavouriteState extends State<Favourite> {
                       );
                     })),
             Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20,bottom: 20),
-              child: Container(
-                height: 60,
-                width: 370,
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: const Color.fromRGBO(83, 177, 117, 1),
-                ),
-                alignment: Alignment.center,
-              
-                 child: Text(
+              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+              child: GestureDetector(
+                onTap:()async{
+                    for(int i=0;i<allData.length;i++){
+                   Map<String, dynamic> data = {
+                      'image': allData[i]['imagepath'],
+                      'title': allData[i]['title'],
+                      'desc': allData[i]['desc'],
+                      'price': allData[i]['price'],
+                      'count': allData[i]['count'],
+                      'id': allData[i]['price'],   
+                    };
+                    await FirebaseFirestore.instance
+                        .collection('Cart')
+                        .add(data); 
+                    }
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text("Item Added to Cart",style: TextStyle(
+                      fontSize: 20
+                    ),),
+                    ));
+                },
+                child: Container(
+                  height: 60,
+                  width: 370,
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: const Color.fromRGBO(83, 177, 117, 1),
+                  ),
+                  alignment: Alignment.center,
+                  child: Text(
                     "Add All To Cart",
                     style: GoogleFonts.dmSans(
                         fontWeight: FontWeight.w700,
                         fontSize: 20,
                         color: Colors.white),
                   ),
+                ),
               ),
             ),
           ],
@@ -192,46 +283,46 @@ class _FavouriteState extends State<Favourite> {
                   _onItemTapped(0);
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
-                    return const HomePage();
+                    return const HomePage1();
                   }));
                 },
                 child: const Icon(Icons.storefront)),
             label: 'Shop',
           ),
-           BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: GestureDetector(
-              onTap:(){
-                 _onItemTapped(2);
+                onTap: () {
+                  _onItemTapped(2);
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
                     return const Exploar();
                   }));
-              },
-              child: Icon(Icons.search)),
+                },
+                child: const Icon(Icons.search)),
             label: 'Explore',
           ),
-           BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: GestureDetector(
-              onTap:(){
-                 _onItemTapped(3);
+                onTap: () {
+                  _onItemTapped(3);
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
                     return const Cart();
                   }));
-              },
-              child: Icon(Icons.shopping_cart)),
+                },
+                child: const Icon(Icons.shopping_cart)),
             label: 'Cart',
           ),
-           BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: GestureDetector(
-              onTap:(){
-                 _onItemTapped(4);
+                onTap: () {
+                  _onItemTapped(4);
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
                     return const Favourite();
                   }));
-              },
-              child: Icon(Icons.favorite_border)),
+                },
+                child: const Icon(Icons.favorite_border)),
             label: 'Favourite',
           ),
         ],
@@ -239,90 +330,3 @@ class _FavouriteState extends State<Favourite> {
     );
   }
 }
-//  Expanded(
-//               child: Container(
-//                 child: ListView.builder(
-//                     itemCount: imageList.length,
-//                     shrinkWrap: true,
-//                     itemBuilder: (context, index) {
-//                       return Padding(
-//                         padding: const EdgeInsets.all(0),
-//                         child: SingleChildScrollView(
-//                           scrollDirection: Axis.vertical,
-//                           child: Column(
-//                             children: [
-//                               const Divider(
-//                                 indent: 20,
-//                                 endIndent: 20,
-//                                 height: 2,
-//                                 color: Color.fromRGBO(124, 124, 124, 1),
-//                               ),
-//                               const SizedBox(
-//                                 height: 10,
-//                               ),
-//                               Container(
-//                                 padding:
-//                                     const EdgeInsets.only(left: 10, bottom: 10),
-//                                 child: Row(
-//                                   children: [
-//                                     Image.asset(imageList[index]['image']),
-//                                     const SizedBox(
-//                                       width: 20,
-//                                     ),
-//                                     Column(
-//                                         mainAxisAlignment:
-//                                             MainAxisAlignment.start,
-//                                         crossAxisAlignment:
-//                                             CrossAxisAlignment.start,
-//                                         children: [
-//                                           Text(
-//                                             imageList[index]['title'],
-//                                             style: GoogleFonts.dmSans(
-//                                               fontWeight: FontWeight.w700,
-//                                               fontSize: 20,
-//                                               color: Colors.black,
-//                                             ),
-//                                           ),
-//                                           const SizedBox(
-//                                             height: 5,
-//                                           ),
-//                                           Text(
-//                                             imageList[index]['desc'],
-//                                             style: GoogleFonts.dmSans(
-//                                               fontWeight: FontWeight.w700,
-//                                               fontSize: 17,
-//                                               color: const Color.fromRGBO(
-//                                                   124, 124, 124, 1),
-//                                             ),
-//                                           ),
-//                                         ]),
-//                                     // Spacer(),
-//                                     Row(
-//                                       children: [
-//                                         Text(
-//                                           imageList[index]['price'],
-//                                           style: GoogleFonts.dmSans(
-//                                             fontWeight: FontWeight.w700,
-//                                             fontSize: 20,
-//                                             color: Colors.black,
-//                                           ),
-//                                         ),
-//                                         // const Spacer(),
-//                                         const Icon(
-//                                           Icons.arrow_forward_ios,
-//                                           color:
-//                                               Color.fromRGBO(124, 124, 124, 1),
-//                                           size: 30,
-//                                         ),
-//                                       ],
-//                                     ),
-//                                   ],
-//                                 ),
-//                               ),
-//                             ],
-//                           ),
-//                         ),
-//                       );
-//                     }),
-//               ),
-//             ),

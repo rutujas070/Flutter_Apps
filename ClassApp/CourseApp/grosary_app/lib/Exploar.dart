@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grosary_app/Beverages.dart';
 import 'package:grosary_app/cart.dart';
 import 'package:grosary_app/favourit.dart';
-import 'package:grosary_app/home.dart';
+import 'package:grosary_app/home1.dart';
 
 class Exploar extends StatefulWidget {
   const Exploar({super.key});
@@ -145,7 +144,7 @@ class _ExploarState extends State<Exploar> {
               onTap:(){
                 _onItemTapped(0);
                 Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                  return const HomePage();
+                  return const HomePage1();
                 }));
               },
               child: const Icon(Icons.storefront)),

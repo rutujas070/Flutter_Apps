@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:grosary_app/home.dart';
+import 'package:grosary_app/home1.dart';
 
 class PaymentComplete extends StatefulWidget {
   const PaymentComplete({super.key});
@@ -52,7 +52,7 @@ class _PaymentCompleteState extends State<PaymentComplete> {
             GestureDetector(
               onTap:(){
                Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context){
-                return const HomePage();
+                return const HomePage1();
                }), (route){
                 return false;
                });
