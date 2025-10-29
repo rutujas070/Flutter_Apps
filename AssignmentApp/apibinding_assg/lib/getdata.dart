@@ -66,7 +66,7 @@ class GetDataAll extends StatelessWidget {
                         // log(jsonData[0]['name']);
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return GetWholeData(deviceData12: jsonData,pertucularIndex: index,);
+                          return GetWholeData(deviceData12: jsonData,pertucularIndex: index);
                         }));   
                     },
                     child: Image.asset(

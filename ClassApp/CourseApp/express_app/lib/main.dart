@@ -1,4 +1,4 @@
-import 'package:express_app/graph.dart';
+
 import 'package:express_app/splash.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: Page2(),        //GraphScreen
+      home: ExpenseFirst(),        //GraphScreen
     );
   }
 }
