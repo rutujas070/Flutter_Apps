@@ -381,7 +381,9 @@ class EducationScreen extends StatelessWidget {
             height: size.width * 0.05,
           ),
           Card(
-            color: Colors.white,
+            color: themeProvider.isDarkMode
+                ? Colors.grey[900] // Card also toggle colour
+                : Colors.white,
             child: ListTile(
               title: Text(
                 'Shri Jagadamba Prasadik Vidyalaya, Bhokar.',
@@ -403,7 +405,9 @@ class EducationScreen extends StatelessWidget {
             height: size.width * 0.05,
           ),
           Card(
-            color: Colors.white,
+            color: themeProvider.isDarkMode
+                ? Colors.grey[900] // Card also toggle colour
+                : Colors.white,
             child: ListTile(
               title: Text(
                 'RB Narayanrao Borawake College, Shrirampur',
@@ -425,7 +429,9 @@ class EducationScreen extends StatelessWidget {
             height: size.width * 0.05,
           ),
           Card(
-            color: Colors.white,
+            color: themeProvider.isDarkMode
+                ? Colors.grey[900] // Card also toggle colour
+                : Colors.white,
             child: ListTile(
               title: Text(
                 'Zeal College of Engineering and Research, Pune',
@@ -774,6 +780,7 @@ class ProjectCard extends StatelessWidget {
   final String title;
   final String description;
   final String videoUrl;
+  
 
   const ProjectCard(
       {super.key,
@@ -783,8 +790,11 @@ class ProjectCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Card(
-      color: Colors.white,
+      color: themeProvider.isDarkMode
+                ? Colors.grey[900] // Card also toggle colour
+                : Colors.white,
       margin: const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 16.0),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -1127,7 +1137,7 @@ class CertificateScreen extends StatelessWidget {
                 margin: const EdgeInsets.all(10),
                 child: Column(
                   children: [
-                   const Text(
+                    const Text(
                       "Cource Complition Certificat of Full-Stack Web Development",
                       style: const TextStyle(fontSize: 20, color: Colors.black),
                     ),
@@ -1138,7 +1148,6 @@ class CertificateScreen extends StatelessWidget {
                   ],
                 ),
               ),
-             
             ],
           ),
         ),
