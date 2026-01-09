@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:transaction_app/view/Setpin.dart';
 
 class Verificastion extends StatefulWidget {
   const Verificastion({super.key});
@@ -42,10 +43,8 @@ class _VerificastionState extends State<Verificastion> {
   Widget keypadButton(String value) {
     return InkWell(
       onTap: () => onNumberTap(value),
-      borderRadius: BorderRadius.circular(50), // makes ripple circular
-      splashColor: Colors.green.withOpacity(0.3), // ripple effect color
-      // ignore: duplicate_ignore
-      // ignore: deprecated_member_use
+      borderRadius: BorderRadius.circular(50),
+      splashColor: Colors.green.withOpacity(0.3),
       highlightColor: Colors.green.withOpacity(0.1),
       child: Center(
         child: Text(
@@ -53,6 +52,156 @@ class _VerificastionState extends State<Verificastion> {
           style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
         ),
       ),
+    );
+  }
+
+  void downSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) {
+        return Padding(
+          padding: EdgeInsetsGeometry.only(
+            left: 30,
+            right: 30,
+            top: 40,
+            bottom: 40,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                "Verification Code",
+                style: GoogleFonts.poppins(
+                  fontSize: 25,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(height: 20),
+              Text(
+                "We have sent the code verification to your mobile number. Wrong number ?",
+                style: GoogleFonts.poppins(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 15,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 20),
+              Container(
+                decoration: BoxDecoration(
+                  color: Color.fromRGBO(9, 112, 62, 1),
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                padding: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+                child: Text(
+                  "+6289617923533",
+                  style: GoogleFonts.poppins(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 50),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: Color.fromRGBO(92, 168, 131, 1),
+                    ),
+                    height: 60,
+                    width: 60,
+                    padding: const EdgeInsets.only(top: 15),
+                    child: Text(
+                      "5",
+                      style: GoogleFonts.poppins(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: Color.fromRGBO(92, 168, 131, 1),
+                    ),
+                    height: 60,
+                    width: 60,
+                    padding: const EdgeInsets.only(top: 15),
+                    child: Text(
+                      "6",
+                      style: GoogleFonts.poppins(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: Color.fromRGBO(92, 168, 131, 1),
+                    ),
+                    height: 60,
+                    width: 60,
+                    padding: const EdgeInsets.only(top: 15),
+                    child: Text(
+                      "3",
+                      style: GoogleFonts.poppins(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: Color.fromRGBO(92, 168, 131, 1),
+                    ),
+                    height: 60,
+                    width: 60,
+                    padding: const EdgeInsets.only(top: 15),
+                    child: Text(
+                      "2",
+                      style: GoogleFonts.poppins(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 40),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Setpin()),
+                  );
+                },
+                child: Text(
+                  "Resend Code in 00:48",
+                  style: GoogleFonts.poppins(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -188,20 +337,27 @@ class _VerificastionState extends State<Verificastion> {
               ),
             ),
 
-             Padding(
+            Padding(
               padding: const EdgeInsets.only(bottom: 40),
               child: ElevatedButton(
-                onPressed: onNext,
+                onPressed: downSheet,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color.fromRGBO(9, 112, 62, 1),
                   minimumSize: Size(double.infinity, 60),
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25)),
+                    borderRadius: BorderRadius.circular(25),
+                  ),
                 ),
-                child: Text("NEXT",
-                    style:GoogleFonts.poppins(fontSize: 20,fontWeight: FontWeight.w400,color: Colors.white)),
+                child: Text(
+                  "NEXT",
+                  style: GoogleFonts.poppins(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.white,
+                  ),
+                ),
               ),
-            )
+            ),
           ],
         ),
       ),

@@ -71,7 +71,7 @@ setState(() {
     super.initState();
     setState(() {});
     fun();
-    // addData();
+    //addData();
   }
 
   void _onItemTapped(int index) {
@@ -79,7 +79,6 @@ setState(() {
       _selectedIndex = index;
     });
   }
-
 
   Widget build(BuildContext context) {
     return Scaffold(
