@@ -1,0 +1,12 @@
+com.example.home_rental_app-debug-0 C:\Incubators_flutter\flutter_app\ClassApp\CourseApp\home_rental_app\android\app\src\debug\res
+com.example.home_rental_app-main-1 C:\Incubators_flutter\flutter_app\ClassApp\CourseApp\home_rental_app\android\app\src\main\res
+com.example.home_rental_app-pngs-2 C:\Incubators_flutter\flutter_app\ClassApp\CourseApp\home_rental_app\build\app\generated\res\pngs\debug
+com.example.home_rental_app-resValues-3 C:\Incubators_flutter\flutter_app\ClassApp\CourseApp\home_rental_app\build\app\generated\res\resValues\debug
+com.example.home_rental_app-rs-4 C:\Incubators_flutter\flutter_app\ClassApp\CourseApp\home_rental_app\build\app\generated\res\rs\debug
+com.example.home_rental_app-mergeDebugResources-5 C:\Incubators_flutter\flutter_app\ClassApp\CourseApp\home_rental_app\build\app\intermediates\incremental\debug\mergeDebugResources\merged.dir
+com.example.home_rental_app-mergeDebugResources-6 C:\Incubators_flutter\flutter_app\ClassApp\CourseApp\home_rental_app\build\app\intermediates\incremental\debug\mergeDebugResources\stripped.dir
+com.example.home_rental_app-merged_res-7 C:\Incubators_flutter\flutter_app\ClassApp\CourseApp\home_rental_app\build\app\intermediates\merged_res\debug
+com.example.home_rental_app-core-1.6.0-8 C:\Users\dell\.gradle\caches\transforms-3\284a410c767ad6c7a2b0ffc8d8d85981\transformed\core-1.6.0\res
+com.example.home_rental_app-jetified-window-java-1.0.0-beta04-9 C:\Users\dell\.gradle\caches\transforms-3\2a215381204751055df81b6269e717b7\transformed\jetified-window-java-1.0.0-beta04\res
+com.example.home_rental_app-jetified-annotation-experimental-1.1.0-10 C:\Users\dell\.gradle\caches\transforms-3\3d2f03fc996c2e0aa3dee5cfa3002cd1\transformed\jetified-annotation-experimental-1.1.0\res
+com.example.home_rental_app-jetified-window-1.0.0-beta04-11 C:\Users\dell\.gradle\caches\transforms-3\f302e75fb7efd781bcf1a29281c188da\transformed\jetified-window-1.0.0-beta04\res

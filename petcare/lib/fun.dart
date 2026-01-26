@@ -1,0 +1,86 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+Widget traning(String imageName,String heading,String subheading,String like){
+  return Container(
+              height: 140,
+              //padding: const EdgeInsets.all(5),
+              margin: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                  boxShadow: const [
+                    BoxShadow(
+                        color: Color.fromRGBO(22, 54, 31, 0.08),
+                        offset: Offset(0, 8),
+                        blurRadius: 16,
+                        spreadRadius: -4)
+                  ]),
+              child: Row(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(
+                      top: 5,
+                    ),
+                    child: Stack(
+                      children: [
+                        Image.asset(imageName),
+                        Image.asset("assets/images/fi_play-circle.png"),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    //mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        heading,
+                        style: GoogleFonts.poppins(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 17,
+                          color: Colors.black,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        subheading,
+                        style: GoogleFonts.poppins(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 15,
+                          color: Colors.black,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.star_border_outlined,
+                            size: 20,
+                            color: Color.fromRGBO(247, 164, 100, 1),
+                          ),
+                          Text(
+                            like,
+                            style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 15,
+                              color: const Color.fromRGBO(194, 195, 204, 1),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            );
+}
