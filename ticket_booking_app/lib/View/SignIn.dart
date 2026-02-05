@@ -85,7 +85,6 @@ class _SigninState extends State<Signin> {
                 width: 360,
                 child: TextField(
                   controller: _nameTextEditingController,
-                  obscureText: !_isPasswordVisible,
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -128,7 +127,6 @@ class _SigninState extends State<Signin> {
                 width: 360,
                 child: TextField(
                   controller: _phoneTextEditingController,
-                  obscureText: !_isPasswordVisible,
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),

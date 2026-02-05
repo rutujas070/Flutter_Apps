@@ -34,8 +34,8 @@ class _ContactState extends State<Contact> {
       TextEditingController();
   final TextEditingController _idTextEditingController =
       TextEditingController();
-  final AuthController _authController= AuthController();
-  final AddUserData _addUser=AddUserData();
+  // final AuthController _authController= AuthController();
+  // final AddUserData _addUser=AddUserData();
 
   @override
   Widget build(BuildContext context) {
