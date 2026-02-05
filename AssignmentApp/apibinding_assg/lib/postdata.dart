@@ -6,6 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 
 class PostData extends StatefulWidget {
+  const PostData({super.key});
+
   @override
   State createState() => _PostDataState();
 }

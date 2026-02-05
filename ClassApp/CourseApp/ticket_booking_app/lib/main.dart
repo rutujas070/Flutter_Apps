@@ -16,8 +16,7 @@ void main() async{
 );
   runApp(
     ChangeNotifierProvider(
-      create: (_) => Companay(
-        
+      create: (_) => Companay(  
       ),
       child: const MyApp(),
     ),
